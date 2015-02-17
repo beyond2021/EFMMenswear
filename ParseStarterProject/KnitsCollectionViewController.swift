@@ -12,7 +12,7 @@ import Parse
 class KnitsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
     @IBOutlet weak var EFMCollectionView: UICollectionView!
  
-     var efmKnitsResultsArray = []
+     var efmKnitsResultsArray = [AnyObject]()
     
     
     var imageFilesArray:NSMutableArray! = NSMutableArray()
@@ -31,6 +31,8 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     func queryParseMethod(){
         let query = PFQuery(className: "Knits")
+        
+        
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
@@ -71,7 +73,9 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     }
     
     
-    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
     
     
     
@@ -152,6 +156,19 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //
+    }
+    
+    /*
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let headerView:EFMCollectionViewHeaderView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "EFMCollectionViewHeaderView", forIndexPath: self.efmKnitsResultsArray[indexPath.section] as NSIndexPath) as EFMCollectionViewHeaderView
+        
+        return headerView
+    }
+*/
+    
+    func setupBackButton(){
+        
+        
     }
     
 
