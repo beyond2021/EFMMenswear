@@ -167,24 +167,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         view.addSubview(snapshot)
         alertView.removeFromSuperview()
         
-        /*
-        The animation isn’t quite what we expected. You can see the red alertView animate as expected, but the scale of its children doesn’t change. Changing the parent’s frame, doesn’t automatically change its children’s frames.
-        
-        We’ll use a feature introduced in iOS 7 called UIView snapshots to fix the animation. This allows you to take a snapshot of a UIView together with its hierarchy and render it into a new UIView.
-        */
-        
-        
-        //        UIView.animateKeyframesWithDuration(4, delay: 0, options: .CalculationModeCubic, animations: {
-        //
-        //            UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.5) {
-        //                self.alertView.frame = smallFrame
-        //            }
-        //
-        //            UIView.addKeyframeWithRelativeStartTime(0.5, relativeDuration: 0.5) {
-        //                self.alertView.frame = finalFrame
-        //            }
-        //            }, completion: nil)
-        UIView.animateKeyframesWithDuration(4, delay: 0, options: .CalculationModeCubic, animations: {
+                UIView.animateKeyframesWithDuration(4, delay: 0, options: .CalculationModeCubic, animations: {
             UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.5) {
                 snapshot.frame = smallFrame
             }
