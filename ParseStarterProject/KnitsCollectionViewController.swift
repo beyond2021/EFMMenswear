@@ -10,9 +10,49 @@ import UIKit
 import Parse
 
 class KnitsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
+    
+    var pClassName:String!
+    
+    var EFMImage = UIImage()
+   // var downloader = KeevParseDownloader?()
+    
+    
     @IBOutlet weak var EFMCollectionView: UICollectionView!
  
      var efmKnitsResultsArray = [AnyObject]()
+    
+    
+   
+    var largePhotoIndexPath : NSIndexPath? {
+        didSet {
+            //2
+            var indexPaths = [NSIndexPath]()
+            if largePhotoIndexPath != nil {
+                indexPaths.append(largePhotoIndexPath!)
+            }
+            if oldValue != nil {
+                indexPaths.append(oldValue!)
+            }
+            //3
+            EFMCollectionView.performBatchUpdates({
+                self.EFMCollectionView.reloadItemsAtIndexPaths(indexPaths)
+                return
+                }){
+                    completed in
+                    //4
+                    if self.largePhotoIndexPath != nil {
+                        self.EFMCollectionView.scrollToItemAtIndexPath(
+                            self.largePhotoIndexPath!,
+                            atScrollPosition: .CenteredVertically,
+                            animated: true)
+                    }
+            }
+        }
+    }
+
+    
+    
+    
     
     
     var imageFilesArray:NSMutableArray! = NSMutableArray()
@@ -20,12 +60,59 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "KNITS"
+        
         //self.navigationController?.navigationBarHidden = true;
         EFMCollectionView.dataSource = self
         EFMCollectionView.delegate = self
-      //  loadPhotos()
+        //loadPhotos()
         queryParseMethod()
+        
+       // getTheData()
+        
           }
+    
+    func getTheData(){
+        
+        let downloader: KeevParseDownloader = KeevParseDownloader()
+        
+        downloader.queryParseMethod("Knits")
+        
+        println(downloader.resultsArray)
+        self.efmKnitsResultsArray = downloader.resultsArray
+        self.EFMCollectionView.reloadData()        
+        
+    }
+    
+    func loadPhotos(){
+        
+        let downloader: KeevParseDownloader = KeevParseDownloader()
+        
+        pClassName = "Knits"
+        
+        downloader.searchFlickrForParseString(pClassName, completion: {(pClassName:String!, parseData:NSMutableArray!, error:NSError!) ->() in
+            
+            if error == nil{
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    
+                    self.efmKnitsResultsArray = parseData
+                    self.EFMCollectionView.reloadData()
+                    downloader.description
+                    
+                  //  println("Parse data is : \(downloader.efmPrice)") as NSNumber
+                    
+                })
+            }
+            
+        })
+        
+    }
+    
+
+    
+    
+    
     
     
     
@@ -40,6 +127,9 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
                 self.efmKnitsResultsArray = objects as Array
                 
                 self.EFMCollectionView.reloadData()
+                               
+               
+                /*
                
                 NSLog("Successfully retrieved \(objects.count) scores.")
                 // Do something with the found objects
@@ -48,7 +138,7 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
                     
                     
                     
-                    var efmPhoto:KnitPhoto = KnitPhoto()
+                   let  efmPhoto = EFMPhoto(image: UIImage?(), efmTitle: String(), efmPrice: NSDecimalNumber(), deliveryType: DeliveryType(), efmDescription: String(), efmFeatures: String())
                     //efmPhoto = object as KnitPhoto
                     
                     
@@ -63,6 +153,8 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
                     
                     
                 }
+*/
+
             } else {
                 // Log details of the failure
                 NSLog("Error: %@ %@", error, error.userInfo!)
@@ -73,13 +165,12 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     }
     
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        println("the count is : \(efmKnitsResultsArray.count)")
         return efmKnitsResultsArray.count
         
         
@@ -112,13 +203,14 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
                 
             let imageData:NSData = data
                 
-            let image:UIImage = UIImage(data: imageData)!
+            //let image:UIImage = UIImage(data: imageData)!
+                self.EFMImage = UIImage(data: imageData)!
             
             
             dispatch_async(dispatch_get_main_queue(), {
                 
-                cell.image = image
-                
+               // cell.image = image
+                cell.image = self.EFMImage
                 
                 
                 let yOffset:CGFloat = ((collectionView.contentOffset.y - cell.frame.origin.y) / 200) * 5
@@ -133,16 +225,15 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         return cell
     }
     
-    //WE need this scrollview delegate method for the cell parallax
+   
     
+    
+  
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        // here we got through all the views in the collect and set the offset
+        
         for view in EFMCollectionView.visibleCells(){
-            //next we say that each view is a collectionView cell
+            
             var view:KnitsCollectionViewCell = view as KnitsCollectionViewCell
-            
-            // next we set the y offset. yje collection view content offset in the y direction minus view . fram.origin in the Y direction divided by the height of the imageview minus 25
-            
             
             var yOffset:CGFloat = ((EFMCollectionView.contentOffset.y - view.frame.origin.y) / 200) * 25
             view.setImageOffset(CGPointMake(0, yOffset))
@@ -153,12 +244,59 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         
     }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //
-    }
+
     
     /*
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if let identifier = segue.identifier{
+            switch identifier{
+                
+            case "showDetail":
+                if let vc = segue.destinationViewController as? EFMDetailsViewController{
+                    // vc.property1 =
+                    // vc. callMethodToSetUp(...;)
+                    // let create a new  MVC
+                    // Call Methods and set properties.
+                    // The outlets have NOT been set yet.
+                   
+                    
+                }
+            default: break
+                
+            }
+            
+            
+        }
+        
+        
+    }
+*/
+    
+    
+    
+    /*
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+       
+        
+        let newVC = EFMDetailsViewController()
+        newVC.efmImageView.image = EFMImage
+        
+        let imageObject:PFObject = self.efmKnitsResultsArray[indexPath.row] as PFObject
+        
+       
+        
+       
+    }
+*/
+    
+    
+    
+    /*
+   
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView:EFMCollectionViewHeaderView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "EFMCollectionViewHeaderView", forIndexPath: self.efmKnitsResultsArray[indexPath.section] as NSIndexPath) as EFMCollectionViewHeaderView
         
@@ -166,10 +304,35 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     }
 */
     
-    func setupBackButton(){
-        
+    /*
+
+    func collectionView(collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+            //1
+            switch kind {
+                //2
+            case UICollectionElementKindSectionHeader:
+                //3
+                let headerView =
+                collectionView.dequeueReusableSupplementaryViewOfKind(kind,
+                    withReuseIdentifier: "EFMCollectionViewHeaderView",
+                    forIndexPath: indexPath)
+                    as EFMCollectionViewHeaderView
+                headerView.backButton.addTarget(self, action: "back", forControlEvents: UIControlEvents.TouchUpInside)
+                
+             //   headerView.label.text = searches[indexPath.section].searchTerm
+                return headerView
+            default:
+                //4
+                assert(false, "Unexpected element kind")
+            }
+    }*/
+    func back(){
+        println("back button was pressed")
         
     }
+    
     
 
 

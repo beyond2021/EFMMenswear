@@ -7,15 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220EED091A95F51C008AE372 /* EFMDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */; };
+		220EED0B1A9684B3008AE372 /* KeevParseDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EED0A1A9684B3008AE372 /* KeevParseDownloader.swift */; };
 		221A37081A8C546B00B4D508 /* EFM_Launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 221A37071A8C546B00B4D508 /* EFM_Launch.jpg */; };
 		221A370B1A8C5BEF00B4D508 /* DonradInfo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 221A37091A8C5BEF00B4D508 /* DonradInfo.jpg */; };
 		221A370C1A8C5BEF00B4D508 /* EFMLOGO.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 221A370A1A8C5BEF00B4D508 /* EFMLOGO.jpg */; };
-		225F02F81A91C37F00653D0B /* EFMCollectionViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225F02F71A91C37F00653D0B /* EFMCollectionViewHeaderView.swift */; };
 		228DF8B71A90A24F00D03FA5 /* KnitsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DF8B61A90A24F00D03FA5 /* KnitsCollectionViewCell.swift */; };
-		228DF8B91A90A6C100D03FA5 /* KnitPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DF8B81A90A6C100D03FA5 /* KnitPhoto.swift */; };
+		228DF8B91A90A6C100D03FA5 /* EFMPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DF8B81A90A6C100D03FA5 /* EFMPhoto.swift */; };
 		228DF8BB1A90AB6B00D03FA5 /* EFMDownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DF8BA1A90AB6B00D03FA5 /* EFMDownLoader.swift */; };
 		22C2D1E71A8C4EE10089BD99 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C2D1E61A8C4EE10089BD99 /* StoreKit.framework */; };
 		22C2D1E91A8C4EF20089BD99 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C2D1E81A8C4EF20089BD99 /* MapKit.framework */; };
+		22DE76F61A958E2E00A7D29A /* KeevCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE76F51A958E2E00A7D29A /* KeevCollectionHeaderView.swift */; };
 		22FACF3A1A8C715D0066163C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FACF391A8C715D0066163C /* LaunchViewController.swift */; };
 		22FACF3C1A8DD50D0066163C /* KnitsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FACF3B1A8DD50D0066163C /* KnitsCollectionViewController.swift */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
@@ -34,16 +36,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMDetailsViewController.swift; sourceTree = "<group>"; };
+		220EED0A1A9684B3008AE372 /* KeevParseDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeevParseDownloader.swift; sourceTree = "<group>"; };
 		221A37071A8C546B00B4D508 /* EFM_Launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = EFM_Launch.jpg; sourceTree = "<group>"; };
 		221A37091A8C5BEF00B4D508 /* DonradInfo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DonradInfo.jpg; sourceTree = "<group>"; };
 		221A370A1A8C5BEF00B4D508 /* EFMLOGO.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = EFMLOGO.jpg; sourceTree = "<group>"; };
-		225F02F71A91C37F00653D0B /* EFMCollectionViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMCollectionViewHeaderView.swift; sourceTree = "<group>"; };
 		228DF8B61A90A24F00D03FA5 /* KnitsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnitsCollectionViewCell.swift; sourceTree = "<group>"; };
-		228DF8B81A90A6C100D03FA5 /* KnitPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnitPhoto.swift; sourceTree = "<group>"; };
+		228DF8B81A90A6C100D03FA5 /* EFMPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMPhoto.swift; sourceTree = "<group>"; };
 		228DF8BA1A90AB6B00D03FA5 /* EFMDownLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMDownLoader.swift; sourceTree = "<group>"; };
 		22C2D1E51A8C4E2F0089BD99 /* ParseStarterProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ParseStarterProject.entitlements; sourceTree = "<group>"; };
 		22C2D1E61A8C4EE10089BD99 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		22C2D1E81A8C4EF20089BD99 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		22DE76F51A958E2E00A7D29A /* KeevCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeevCollectionHeaderView.swift; sourceTree = "<group>"; };
 		22FACF391A8C715D0066163C /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		22FACF3B1A8DD50D0066163C /* KnitsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnitsCollectionViewController.swift; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* EFMMenswear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EFMMenswear.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +94,7 @@
 		220752141A92FEA700D47873 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				225F02F71A91C37F00653D0B /* EFMCollectionViewHeaderView.swift */,
+				22DE76F51A958E2E00A7D29A /* KeevCollectionHeaderView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -106,7 +110,8 @@
 		220752161A92FED100D47873 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				228DF8B81A90A6C100D03FA5 /* KnitPhoto.swift */,
+				228DF8B81A90A6C100D03FA5 /* EFMPhoto.swift */,
+				220EED0A1A9684B3008AE372 /* KeevParseDownloader.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
+				220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */,
 				228DF8B61A90A24F00D03FA5 /* KnitsCollectionViewCell.swift */,
 				22FACF3B1A8DD50D0066163C /* KnitsCollectionViewController.swift */,
 				22FACF391A8C715D0066163C /* LaunchViewController.swift */,
@@ -303,11 +309,13 @@
 			files = (
 				228DF8B71A90A24F00D03FA5 /* KnitsCollectionViewCell.swift in Sources */,
 				228DF8BB1A90AB6B00D03FA5 /* EFMDownLoader.swift in Sources */,
-				228DF8B91A90A6C100D03FA5 /* KnitPhoto.swift in Sources */,
+				228DF8B91A90A6C100D03FA5 /* EFMPhoto.swift in Sources */,
+				220EED0B1A9684B3008AE372 /* KeevParseDownloader.swift in Sources */,
 				22FACF3A1A8C715D0066163C /* LaunchViewController.swift in Sources */,
 				22FACF3C1A8DD50D0066163C /* KnitsCollectionViewController.swift in Sources */,
+				22DE76F61A958E2E00A7D29A /* KeevCollectionHeaderView.swift in Sources */,
+				220EED091A95F51C008AE372 /* EFMDetailsViewController.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
-				225F02F81A91C37F00653D0B /* EFMCollectionViewHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -182,7 +182,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         self.navigationController?.navigationBarHidden = true;
+       //  self.navigationController?.navigationBarHidden = true;
         
       
         
@@ -227,7 +227,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
    
     }
     func knits(){
-         dismissAlert()
+        // dismissAlert()
         //self.performSegueWithIdentifier("showKnits", sender: self )
         timer = NSTimer.scheduledTimerWithTimeInterval(0.9, target: self, selector: Selector("newVC"), userInfo: nil, repeats: true)
     }
