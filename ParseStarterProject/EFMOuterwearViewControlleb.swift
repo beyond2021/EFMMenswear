@@ -1,31 +1,31 @@
 //
-//  KnitsCollectionViewController.swift
+//  EFMOuterwearViewControlleb.swift
 //  EFMMenswear
 //
-//  Created by KEEVIN MITCHELL on 2/13/15.
+//  Created by KEEVIN MITCHELL on 2/24/15.
 //  Copyright (c) 2015 Parse. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-class KnitsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, DownLoadedData {
+class EFMOuterwearViewControlleb: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, DownLoadedData {
     
     var pClassName:String!
     
     var EFMImage = UIImage()
     
-   // var pHoto = EFMPhoto()
-   // var downloader = KeevParseDownloader?()
+    // var pHoto = EFMPhoto()
+    // var downloader = KeevParseDownloader?()
     
     
     @IBOutlet weak var EFMCollectionView: UICollectionView!
- 
-     var efmKnitsResultsArray = [AnyObject]()
+    
+    var efmOuterwearResultsArray = [AnyObject]()
     
     var ourArray = [AnyObject]()
     
-   
+    
     var largePhotoIndexPath : NSIndexPath? {
         didSet {
             //2
@@ -52,7 +52,7 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
             }
         }
     }
-
+    
     
     
     
@@ -67,11 +67,11 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         static let EFMCellReuseIdentifier: String = "knitsCell "
         
     }
-
+    
     
     func parseDataArray(sender: KeevParseDownloader) -> AnyObject?{
         //  println("Our result is :\(sender.resultsArray)")
-        efmKnitsResultsArray = sender.resultsArray
+        efmOuterwearResultsArray = sender.resultsArray
         self.EFMCollectionView.reloadData()
         
         
@@ -95,36 +95,36 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "KNITS"
+        self.title = "OuterWear"
         
         //self.navigationController?.navigationBarHidden = true;
         EFMCollectionView.dataSource = self
         EFMCollectionView.delegate = self
         //loadPhotos()
-       // queryParseMethod()
+        // queryParseMethod()
         
-       getTheData()
+        getTheData()
         
         
-          }
+    }
     
     func getTheData(){
         
         let downloader: KeevParseDownloader = KeevParseDownloader(datasource: self)
         
-        downloader.queryParseMethod("Knits")
+        downloader.queryParseMethod("OuterWear")
         
         println(downloader.resultsArray)
-        self.efmKnitsResultsArray = downloader.resultsArray
-        self.EFMCollectionView.reloadData()        
+        self.efmOuterwearResultsArray = downloader.resultsArray
+        self.EFMCollectionView.reloadData()
         
     }
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        println("the count is : \(efmKnitsResultsArray.count)")
-        return efmKnitsResultsArray.count
+        //println("the count is : \(efmKnitsResultsArray.count)")
+        return efmOuterwearResultsArray.count
         
         
     }
@@ -144,46 +144,46 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         
         let queue:dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-       
+        
         dispatch_async(queue, { () -> Void in
             
             var error:NSError?
             
-            let imageObject:PFObject = self.efmKnitsResultsArray[indexPath.row] as PFObject
+            let imageObject:PFObject = self.efmOuterwearResultsArray[indexPath.row] as PFObject
             
-            let imageFile:PFFile = imageObject.objectForKey("knitImage") as PFFile
+            let imageFile:PFFile = imageObject.objectForKey("Image") as PFFile
             
             
             imageFile.getDataInBackgroundWithBlock({ (data: NSData!, error: NSError!) -> Void in
                 
-            let imageData:NSData = data
+                let imageData:NSData = data
                 
-            //let image:UIImage = UIImage(data: imageData)!
+                //let image:UIImage = UIImage(data: imageData)!
                 self.EFMImage = UIImage(data: imageData)!
-            
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                
-               // cell.image = image
-                cell.image = self.EFMImage
                 
                 
-                let yOffset:CGFloat = ((collectionView.contentOffset.y - cell.frame.origin.y) / 200) * 5
-                
-                cell.imageOffset = CGPointMake(0, yOffset)
-                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    // cell.image = image
+                    cell.image = self.EFMImage
+                    
+                    
+                    let yOffset:CGFloat = ((collectionView.contentOffset.y - cell.frame.origin.y) / 200) * 5
+                    
+                    cell.imageOffset = CGPointMake(0, yOffset)
+                    
+                    
+                })
                 
             })
-            
         })
-             })
         return cell
     }
     
-   
-   
     
-  
+    
+    
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         for view in EFMCollectionView.visibleCells(){
@@ -203,26 +203,26 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "showDetail"){
+        if(segue.identifier == "outerwearSegue"){
             // check for / catch all visible cell(s)
             for item in EFMCollectionView!.visibleCells() as [KnitsCollectionViewCell] {
                 
                 let cell = sender as KnitsCollectionViewCell
-                 if let indexPath = self.EFMCollectionView.indexPathForCell(cell){
-                
-                
-                // Grab related PFObject
-                var objectData:PFObject = self.efmKnitsResultsArray[indexPath.row] as PFObject
-                
-                // Pass PFObject to second ViewController
-                let theDestination = (segue.destinationViewController as EFMDetailsViewController)
-                theDestination.swag = objectData
+                if let indexPath = self.EFMCollectionView.indexPathForCell(cell){
+                    
+                    
+                    // Grab related PFObject
+                    var objectData:PFObject = self.efmOuterwearResultsArray[indexPath.row] as PFObject
+                    
+                    // Pass PFObject to second ViewController
+                    let theDestination = (segue.destinationViewController as OuterwearDetailsVC)
+                    theDestination.swag = objectData
                 }
             }
         }
     }
     
-  
+    
     
     @IBOutlet weak var done: UIBarButtonItem!
     
@@ -231,7 +231,7 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         self.presentingViewController?.dismissViewControllerAnimated( false , completion: nil)
         
         
-    
+        
     }
     
     

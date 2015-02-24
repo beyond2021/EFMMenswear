@@ -1,19 +1,18 @@
 //
-//  EFMDetailsViewController.swift
+//  OuterwearDetailsVC.swift
 //  EFMMenswear
 //
-//  Created by KEEVIN MITCHELL on 2/19/15.
+//  Created by KEEVIN MITCHELL on 2/24/15.
 //  Copyright (c) 2015 Parse. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-class EFMDetailsViewController: UIViewController {
-
-
+class OuterwearDetailsVC: UIViewController {
+    
     @IBOutlet weak var navBar: UINavigationBar!
-
+    
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -23,7 +22,7 @@ class EFMDetailsViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBOutlet weak var priceLabel: UILabel!
-  //  @IBOutlet weak var priceLabel: UILabel!
+    //  @IBOutlet weak var priceLabel: UILabel!
     
     @IBOutlet weak var efmImageView: UIImageView!
     
@@ -69,20 +68,20 @@ class EFMDetailsViewController: UIViewController {
         self.descriptionLabel.text = swag.objectForKey("Description") as String!
         self.featureLabel.text = swag.objectForKey("Features") as String!
         
-    
+        
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      //  println("The freaking title is \(efmTitle)")
+        //  println("The freaking title is \(efmTitle)")
         
-       self.configureView()
+        self.configureView()
         
         
         //Getting the image
-         efmImageView.image = nil
+        efmImageView.image = nil
         
         
         let queue:dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
@@ -119,6 +118,6 @@ class EFMDetailsViewController: UIViewController {
     @IBAction func purchase(sender: UIButton) {
         // TODO: - Fill in implementation
     }
+
+
 }
-
-

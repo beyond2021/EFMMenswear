@@ -15,8 +15,19 @@
 		228DF8B71A90A24F00D03FA5 /* KnitsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DF8B61A90A24F00D03FA5 /* KnitsCollectionViewCell.swift */; };
 		228DF8B91A90A6C100D03FA5 /* EFMPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DF8B81A90A6C100D03FA5 /* EFMPhoto.swift */; };
 		228DF8BB1A90AB6B00D03FA5 /* EFMDownLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DF8BA1A90AB6B00D03FA5 /* EFMDownLoader.swift */; };
+		22B0FBAF1A98E7B30008FA8E /* EFMMenswear_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B0FBAE1A98E7B30008FA8E /* EFMMenswear_Tests.swift */; };
 		22C2D1E71A8C4EE10089BD99 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C2D1E61A8C4EE10089BD99 /* StoreKit.framework */; };
 		22C2D1E91A8C4EF20089BD99 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C2D1E81A8C4EF20089BD99 /* MapKit.framework */; };
+		22C790771A9C43BC00B0C5FB /* KeevinCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C790761A9C43BC00B0C5FB /* KeevinCustomSegue.swift */; };
+		22C7907D1A9C46DB00B0C5FB /* FirstCustomSegueUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C7907A1A9C46DB00B0C5FB /* FirstCustomSegueUnwind.swift */; };
+		22C7907E1A9C46DB00B0C5FB /* SecondCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C7907B1A9C46DB00B0C5FB /* SecondCustomSegue.swift */; };
+		22C7907F1A9C46DB00B0C5FB /* SecondCustomSegueUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C7907C1A9C46DB00B0C5FB /* SecondCustomSegueUnwind.swift */; };
+		22C790811A9C659800B0C5FB /* EFMOuterwearViewControlleb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C790801A9C659800B0C5FB /* EFMOuterwearViewControlleb.swift */; };
+		22C790841A9C664100B0C5FB /* EFMSweatersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C790831A9C664100B0C5FB /* EFMSweatersViewController.swift */; };
+		22C790861A9C668000B0C5FB /* EFMTrousersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C790851A9C668000B0C5FB /* EFMTrousersViewController.swift */; };
+		22C7908A1A9C67E700B0C5FB /* SeaterDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C790891A9C67E700B0C5FB /* SeaterDetailsVC.swift */; };
+		22C7908C1A9C681600B0C5FB /* OuterwearDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C7908B1A9C681600B0C5FB /* OuterwearDetailsVC.swift */; };
+		22C7908E1A9C684700B0C5FB /* TrousersDeatailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C7908D1A9C684700B0C5FB /* TrousersDeatailVC.swift */; };
 		22DE76F61A958E2E00A7D29A /* KeevCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DE76F51A958E2E00A7D29A /* KeevCollectionHeaderView.swift */; };
 		22FACF3A1A8C715D0066163C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FACF391A8C715D0066163C /* LaunchViewController.swift */; };
 		22FACF3C1A8DD50D0066163C /* KnitsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FACF3B1A8DD50D0066163C /* KnitsCollectionViewController.swift */; };
@@ -35,6 +46,16 @@
 		81BA81811A49E10C00E65899 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		22B0FBB01A98E7B30008FA8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81BA813D1A49DA1800E65899 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81BA81441A49DA1800E65899;
+			remoteInfo = EFMMenswear;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMDetailsViewController.swift; sourceTree = "<group>"; };
 		220EED0A1A9684B3008AE372 /* KeevParseDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeevParseDownloader.swift; sourceTree = "<group>"; };
@@ -44,9 +65,22 @@
 		228DF8B61A90A24F00D03FA5 /* KnitsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnitsCollectionViewCell.swift; sourceTree = "<group>"; };
 		228DF8B81A90A6C100D03FA5 /* EFMPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMPhoto.swift; sourceTree = "<group>"; };
 		228DF8BA1A90AB6B00D03FA5 /* EFMDownLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMDownLoader.swift; sourceTree = "<group>"; };
+		22B0FBAA1A98E7B30008FA8E /* EFMMenswear Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EFMMenswear Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22B0FBAD1A98E7B30008FA8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22B0FBAE1A98E7B30008FA8E /* EFMMenswear_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EFMMenswear_Tests.swift; sourceTree = "<group>"; };
 		22C2D1E51A8C4E2F0089BD99 /* ParseStarterProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ParseStarterProject.entitlements; sourceTree = "<group>"; };
 		22C2D1E61A8C4EE10089BD99 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		22C2D1E81A8C4EF20089BD99 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		22C790761A9C43BC00B0C5FB /* KeevinCustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeevinCustomSegue.swift; sourceTree = "<group>"; };
+		22C7907A1A9C46DB00B0C5FB /* FirstCustomSegueUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstCustomSegueUnwind.swift; sourceTree = "<group>"; };
+		22C7907B1A9C46DB00B0C5FB /* SecondCustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondCustomSegue.swift; sourceTree = "<group>"; };
+		22C7907C1A9C46DB00B0C5FB /* SecondCustomSegueUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondCustomSegueUnwind.swift; sourceTree = "<group>"; };
+		22C790801A9C659800B0C5FB /* EFMOuterwearViewControlleb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMOuterwearViewControlleb.swift; sourceTree = "<group>"; };
+		22C790831A9C664100B0C5FB /* EFMSweatersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMSweatersViewController.swift; sourceTree = "<group>"; };
+		22C790851A9C668000B0C5FB /* EFMTrousersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMTrousersViewController.swift; sourceTree = "<group>"; };
+		22C790891A9C67E700B0C5FB /* SeaterDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeaterDetailsVC.swift; sourceTree = "<group>"; };
+		22C7908B1A9C681600B0C5FB /* OuterwearDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OuterwearDetailsVC.swift; sourceTree = "<group>"; };
+		22C7908D1A9C684700B0C5FB /* TrousersDeatailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrousersDeatailVC.swift; sourceTree = "<group>"; };
 		22DE76F51A958E2E00A7D29A /* KeevCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeevCollectionHeaderView.swift; sourceTree = "<group>"; };
 		22FACF391A8C715D0066163C /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		22FACF3B1A8DD50D0066163C /* KnitsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnitsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +103,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		22B0FBA71A98E7B30008FA8E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81BA81421A49DA1800E65899 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -126,14 +167,77 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		22B0FBAB1A98E7B30008FA8E /* EFMMenswear Tests */ = {
+			isa = PBXGroup;
+			children = (
+				22B0FBAE1A98E7B30008FA8E /* EFMMenswear_Tests.swift */,
+				22B0FBAC1A98E7B30008FA8E /* Supporting Files */,
+			);
+			path = "EFMMenswear Tests";
+			sourceTree = "<group>";
+		};
+		22B0FBAC1A98E7B30008FA8E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				22B0FBAD1A98E7B30008FA8E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		22C790791A9C466400B0C5FB /* Custom Segues */ = {
+			isa = PBXGroup;
+			children = (
+				22C790761A9C43BC00B0C5FB /* KeevinCustomSegue.swift */,
+				22C7907A1A9C46DB00B0C5FB /* FirstCustomSegueUnwind.swift */,
+				22C7907B1A9C46DB00B0C5FB /* SecondCustomSegue.swift */,
+				22C7907C1A9C46DB00B0C5FB /* SecondCustomSegueUnwind.swift */,
+			);
+			name = "Custom Segues";
+			sourceTree = "<group>";
+		};
+		22C790821A9C65C100B0C5FB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				228DF8B61A90A24F00D03FA5 /* KnitsCollectionViewCell.swift */,
+				22C790881A9C676800B0C5FB /* DetailViewControllers */,
+				22C790871A9C66B400B0C5FB /* CollectionViewControllers */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		22C790871A9C66B400B0C5FB /* CollectionViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				22FACF391A8C715D0066163C /* LaunchViewController.swift */,
+				22FACF3B1A8DD50D0066163C /* KnitsCollectionViewController.swift */,
+				22C790801A9C659800B0C5FB /* EFMOuterwearViewControlleb.swift */,
+				22C790831A9C664100B0C5FB /* EFMSweatersViewController.swift */,
+				22C790851A9C668000B0C5FB /* EFMTrousersViewController.swift */,
+			);
+			name = CollectionViewControllers;
+			sourceTree = "<group>";
+		};
+		22C790881A9C676800B0C5FB /* DetailViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */,
+				22C7908B1A9C681600B0C5FB /* OuterwearDetailsVC.swift */,
+				22C790891A9C67E700B0C5FB /* SeaterDetailsVC.swift */,
+				22C7908D1A9C684700B0C5FB /* TrousersDeatailVC.swift */,
+			);
+			name = DetailViewControllers;
+			sourceTree = "<group>";
+		};
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
+				22C790791A9C466400B0C5FB /* Custom Segues */,
 				220752141A92FEA700D47873 /* Views */,
 				220752151A92FEBC00D47873 /* Downloader */,
 				220752161A92FED100D47873 /* Model */,
 				221A37061A8C544900B4D508 /* Images */,
 				81BA81471A49DA1800E65899 /* ParseStarterProject */,
+				22B0FBAB1A98E7B30008FA8E /* EFMMenswear Tests */,
 				81BA816A1A49DB5600E65899 /* Frameworks */,
 				81BA81461A49DA1800E65899 /* Products */,
 			);
@@ -143,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				81BA81451A49DA1800E65899 /* EFMMenswear.app */,
+				22B0FBAA1A98E7B30008FA8E /* EFMMenswear Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,11 +255,8 @@
 		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
 			isa = PBXGroup;
 			children = (
+				22C790821A9C65C100B0C5FB /* ViewControllers */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
-				220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */,
-				228DF8B61A90A24F00D03FA5 /* KnitsCollectionViewCell.swift */,
-				22FACF3B1A8DD50D0066163C /* KnitsCollectionViewController.swift */,
-				22FACF391A8C715D0066163C /* LaunchViewController.swift */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
 				81BA81481A49DA1800E65899 /* Supporting Files */,
 			);
@@ -202,6 +304,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		22B0FBA91A98E7B30008FA8E /* EFMMenswear Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22B0FBB41A98E7B30008FA8E /* Build configuration list for PBXNativeTarget "EFMMenswear Tests" */;
+			buildPhases = (
+				22B0FBA61A98E7B30008FA8E /* Sources */,
+				22B0FBA71A98E7B30008FA8E /* Frameworks */,
+				22B0FBA81A98E7B30008FA8E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22B0FBB11A98E7B30008FA8E /* PBXTargetDependency */,
+			);
+			name = "EFMMenswear Tests";
+			productName = "EFMMenswear Tests";
+			productReference = 22B0FBAA1A98E7B30008FA8E /* EFMMenswear Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		81BA81441A49DA1800E65899 /* EFMMenswear */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "EFMMenswear" */;
@@ -229,6 +349,10 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Parse;
 				TargetAttributes = {
+					22B0FBA91A98E7B30008FA8E = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 81BA81441A49DA1800E65899;
+					};
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = SC6R6MV2N8;
@@ -266,11 +390,19 @@
 			projectRoot = "";
 			targets = (
 				81BA81441A49DA1800E65899 /* EFMMenswear */,
+				22B0FBA91A98E7B30008FA8E /* EFMMenswear Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		22B0FBA81A98E7B30008FA8E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81BA81431A49DA1800E65899 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -303,23 +435,49 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		22B0FBA61A98E7B30008FA8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22B0FBAF1A98E7B30008FA8E /* EFMMenswear_Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81BA81411A49DA1800E65899 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C7908E1A9C684700B0C5FB /* TrousersDeatailVC.swift in Sources */,
 				228DF8B71A90A24F00D03FA5 /* KnitsCollectionViewCell.swift in Sources */,
 				228DF8BB1A90AB6B00D03FA5 /* EFMDownLoader.swift in Sources */,
+				22C7907E1A9C46DB00B0C5FB /* SecondCustomSegue.swift in Sources */,
 				228DF8B91A90A6C100D03FA5 /* EFMPhoto.swift in Sources */,
 				220EED0B1A9684B3008AE372 /* KeevParseDownloader.swift in Sources */,
 				22FACF3A1A8C715D0066163C /* LaunchViewController.swift in Sources */,
 				22FACF3C1A8DD50D0066163C /* KnitsCollectionViewController.swift in Sources */,
+				22C7908A1A9C67E700B0C5FB /* SeaterDetailsVC.swift in Sources */,
+				22C7908C1A9C681600B0C5FB /* OuterwearDetailsVC.swift in Sources */,
+				22C790771A9C43BC00B0C5FB /* KeevinCustomSegue.swift in Sources */,
+				22C790861A9C668000B0C5FB /* EFMTrousersViewController.swift in Sources */,
+				22C790811A9C659800B0C5FB /* EFMOuterwearViewControlleb.swift in Sources */,
+				22C7907F1A9C46DB00B0C5FB /* SecondCustomSegueUnwind.swift in Sources */,
+				22C7907D1A9C46DB00B0C5FB /* FirstCustomSegueUnwind.swift in Sources */,
 				22DE76F61A958E2E00A7D29A /* KeevCollectionHeaderView.swift in Sources */,
 				220EED091A95F51C008AE372 /* EFMDetailsViewController.swift in Sources */,
+				22C790841A9C664100B0C5FB /* EFMSweatersViewController.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22B0FBB11A98E7B30008FA8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81BA81441A49DA1800E65899 /* EFMMenswear */;
+			targetProxy = 22B0FBB01A98E7B30008FA8E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		81BA814E1A49DA1800E65899 /* Main.storyboard */ = {
@@ -333,6 +491,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		22B0FBB21A98E7B30008FA8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "EFMMenswear Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EFMMenswear.app/EFMMenswear";
+			};
+			name = Debug;
+		};
+		22B0FBB31A98E7B30008FA8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "EFMMenswear Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EFMMenswear.app/EFMMenswear";
+			};
+			name = Release;
+		};
 		81BA81621A49DA1800E65899 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -455,6 +649,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		22B0FBB41A98E7B30008FA8E /* Build configuration list for PBXNativeTarget "EFMMenswear Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22B0FBB21A98E7B30008FA8E /* Debug */,
+				22B0FBB31A98E7B30008FA8E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "EFMMenswear" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -86,7 +86,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         let outerwearButtonHeight: CGFloat = 40
         outerwearButton.frame = CGRectMake(alertView.center.x - outerwearButtonWidth/2, alertView.center.y - outerwearButtonHeight/2 + 50, outerwearButtonWidth, outerwearButtonHeight)
         
-        outerwearButton.addTarget(self, action: Selector("dismissAlert"), forControlEvents: UIControlEvents.TouchUpInside)
+        outerwearButton.addTarget(self, action: Selector("outerWear"), forControlEvents: UIControlEvents.TouchUpInside)
         
         
         sweaterButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
@@ -97,7 +97,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         sweaterButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Highlighted)
         sweaterButton.frame = CGRectMake(alertView.center.x - buttonWidth/2, alertView.center.y - buttonHeight/2 + 100, buttonWidth, buttonHeight)
         
-        sweaterButton.addTarget(self, action: Selector("dismissAlert"), forControlEvents: UIControlEvents.TouchUpInside)
+        sweaterButton.addTarget(self, action: Selector("sweaters"), forControlEvents: UIControlEvents.TouchUpInside)
         
         
         trouserButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
@@ -108,7 +108,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         trouserButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Highlighted)
         trouserButton.frame = CGRectMake(alertView.center.x - buttonWidth/2, alertView.center.y - buttonHeight/2 + 150, buttonWidth, buttonHeight)
         
-        trouserButton.addTarget(self, action: Selector("dismissAlert"), forControlEvents: UIControlEvents.TouchUpInside)
+        trouserButton.addTarget(self, action: Selector("trousers"), forControlEvents: UIControlEvents.TouchUpInside)
         
         shopOnlineButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         shopOnlineButton.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 30)
@@ -209,7 +209,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         if let identifier = segue.identifier{
             switch identifier{
                 
-                case "showKnits":
+                case "idSecondSegue":
                     if let vc = segue.destinationViewController as? KnitsCollectionViewController{
                        // vc.property1 =
                         // vc. callMethodToSetUp(...;)
@@ -217,6 +217,36 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
                         // Call Methods and set properties.
                         // The outlets have NOT been set yet.
                 }
+                
+                case "outerwearSegue":
+                    if let vc = segue.destinationViewController as? EFMOuterwearViewControlleb{
+                        // vc.property1 =
+                        // vc. callMethodToSetUp(...;)
+                        // let create a new  MVC
+                        // Call Methods and set properties.
+                        // The outlets have NOT been set yet.
+                }
+                
+            case "sweaterSegue":
+                if let vc = segue.destinationViewController as? EFMSwViewController{
+                    // vc.property1 =
+                    // vc. callMethodToSetUp(...;)
+                    // let create a new  MVC
+                    // Call Methods and set properties.
+                    // The outlets have NOT been set yet.
+                }
+            case "trousersSegue":
+                if let vc = segue.destinationViewController as? EFMTrousersViewController{
+                    // vc.property1 =
+                    // vc. callMethodToSetUp(...;)
+                    // let create a new  MVC
+                    // Call Methods and set properties.
+                    // The outlets have NOT been set yet.
+                }
+                
+                
+               
+
             default: break
                 
             }
@@ -237,15 +267,55 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         
     }
     func newVC(){
-       self.performSegueWithIdentifier("showKnits", sender: self )
+       //self.performSegueWithIdentifier("showKnits", sender: self )
+       self.performSegueWithIdentifier("idSecondSegue", sender: self)
+        
         
     }
     
+    func trousers(){
+      self.performSegueWithIdentifier("outerwearSegue", sender: self)
+        
+    }
+    
+    func sweaters(){
+        self.performSegueWithIdentifier("sweaterSegue", sender: self)
+        
+    }
+    func outerWear(){
+        self.performSegueWithIdentifier("outerwearSegue", sender: self)
+    }
+
+
+    //Unwind
+    override func segueForUnwindingToViewController(toViewController: UIViewController, fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
+             if let id = identifier{
+            if id == "idFirstSegueUnwind" {
+                let unwindSegue = FirstCustomSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
+                    
+                })
+                return unwindSegue
+            }
+            else if id == "idSecondSegueUnwind" {
+                let unwindSegue = SecondCustomSegueUnwind(identifier: id,
+                    source: fromViewController,
+                    destination: toViewController,
+                    performHandler: { () -> Void in
+                        
+                })
+                
+                return unwindSegue
+            }
+        }
+        
+        
+        return super.segueForUnwindingToViewController(toViewController, fromViewController: fromViewController, identifier: identifier)
+            
+    }
+
 }
 
 
 
-
-    
 
 

@@ -27,31 +27,37 @@ func ==(lhs: DeliveryType, rhs: DeliveryType) -> Bool {
 }
 */
 
-class EFMPhoto : NSObject {
+class EFMPhoto  {
     
-//    var efmImage: PFFile?
-//    var efmDescription:String
-//    var efmFeatures:String
-//    var efmPrice:NSNumber
-//    var efmTitle:String
-   // var deliveryType: DeliveryType
+    var efmImage: PFFile? { didSet { println("The image is set") } }
+    var efmDescription:String { didSet { println("The Description is set") } }
+    var efmFeatures:String { didSet { println("The Features is set") } }
+    var efmPrice:NSNumber { didSet { println("The Price is set") } }
+    var efmTitle:String { didSet { println("The Title is set") } }
+    //var deliveryType: DeliveryType
     
     
-    let efmImage = PFFile()
-    let efmDescription = String()
-    let efmFeatures = String()
-    let efmPrice = NSNumber()
-    let efmTitle = String()
-    
+//    let efmImage = PFFile()
+//    let efmDescription = String()
+//    let efmFeatures = String()
+//    let efmPrice = NSNumber()
+//    let efmTitle = String()
+//    
     
     init(efmImage:PFFile?, efmTitle: String, efmPrice: NSNumber,  efmDescription: String, efmFeatures: String) {
-        self.efmImage = efmImage!
+        self.efmImage = efmImage
         self.efmTitle = efmTitle
         self.efmPrice = efmPrice
       //  self.deliveryType = deliveryType
         self.efmDescription = efmDescription
         self.efmFeatures = efmFeatures
     }
+    
+    
+    
+    
+    
+    
     
         
     var priceString: NSString {
