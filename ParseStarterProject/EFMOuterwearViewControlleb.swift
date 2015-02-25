@@ -203,7 +203,7 @@ class EFMOuterwearViewControlleb: UIViewController, UICollectionViewDataSource, 
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "outerwearSegue"){
+        if(segue.identifier == "outerWearDetail"){
             // check for / catch all visible cell(s)
             for item in EFMCollectionView!.visibleCells() as [KnitsCollectionViewCell] {
                 

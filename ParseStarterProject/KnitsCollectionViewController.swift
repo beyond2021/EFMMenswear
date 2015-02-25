@@ -218,6 +218,15 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
                 let theDestination = (segue.destinationViewController as EFMDetailsViewController)
                 theDestination.swag = objectData
                 }
+                if segue.identifier == "idFirstSegueUnwind" {
+                    let firstViewController = segue.destinationViewController as KnitsCollectionViewController
+                    
+                    
+                }
+
+                
+                
+                
             }
         }
     }
@@ -227,12 +236,14 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     @IBOutlet weak var done: UIBarButtonItem!
     
     @IBAction func doneAction(sender: UIBarButtonItem) {
-        //self.performSegueWithIdentifier("idSecondSegueUnwind", sender: self)
-        self.presentingViewController?.dismissViewControllerAnimated( false , completion: nil)
+        self.performSegueWithIdentifier("idFirstSegueUnwind", sender: self)
+       // self.presentingViewController?.dismissViewControllerAnimated( false , completion: nil)
         
         
     
     }
+    
+       
     
     
 }

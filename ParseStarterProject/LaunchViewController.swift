@@ -269,6 +269,10 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
     func newVC(){
        //self.performSegueWithIdentifier("showKnits", sender: self )
        self.performSegueWithIdentifier("idSecondSegue", sender: self)
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        
+//        let thirdViewController = storyBoard.instantiateViewControllerWithIdentifier("KnitsCollectionViewController") as KnitsCollectionViewController
+//        self.presentViewController(thirdViewController, animated:true, completion:nil)
         
         
     }
@@ -312,6 +316,30 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         return super.segueForUnwindingToViewController(toViewController, fromViewController: fromViewController, identifier: identifier)
             
     }
+    
+    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue){
+        //So, in this action method we are going to perform one really easy task: We will change the background color of the view of the first view controller, and then using a UIView animation we will revert it back to normal. Even though it’s pointless to do something like that in a real application, it’s more than a good example so we can see how to perform actions when an unwind segue is executed.
+        
+        
+        if sender.identifier == "idFirstSegueUnwind" {
+            let originalColor = self.view.backgroundColor
+            self.view.backgroundColor = UIColor.redColor()
+            
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                self.view.backgroundColor = originalColor
+            })
+        }
+            
+            //Return from 3rd
+        else{
+           // self.lblMessage.text = "Welcome back!"
+        }
+        
+        
+    }
+
+    
+    
 
 }
 
