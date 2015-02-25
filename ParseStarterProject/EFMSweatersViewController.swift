@@ -21,7 +21,7 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     @IBOutlet weak var EFMCollectionView: UICollectionView!
     
-    var efmKnitsResultsArray = [AnyObject]()
+    var efmSweaterResultsArray = [AnyObject]()
     
     var ourArray = [AnyObject]()
     
@@ -71,7 +71,7 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     func parseDataArray(sender: KeevParseDownloader) -> AnyObject?{
         //  println("Our result is :\(sender.resultsArray)")
-        efmKnitsResultsArray = sender.resultsArray
+        efmSweaterResultsArray = sender.resultsArray
         self.EFMCollectionView.reloadData()
         
         
@@ -95,7 +95,7 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "KNITS"
+        self.title = "Sweaters"
         
         //self.navigationController?.navigationBarHidden = true;
         EFMCollectionView.dataSource = self
@@ -112,10 +112,10 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
         
         let downloader: KeevParseDownloader = KeevParseDownloader(datasource: self)
         
-        downloader.queryParseMethod("Knits")
+        downloader.queryParseMethod("Sweaters")
         
         println(downloader.resultsArray)
-        self.efmKnitsResultsArray = downloader.resultsArray
+        self.efmSweaterResultsArray = downloader.resultsArray
         self.EFMCollectionView.reloadData()
         
     }
@@ -123,8 +123,8 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        println("the count is : \(efmKnitsResultsArray.count)")
-        return efmKnitsResultsArray.count
+       // println("the count is : \(efmKnitsResultsArray.count)")
+        return efmSweaterResultsArray.count
         
         
     }
@@ -149,9 +149,9 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
             
             var error:NSError?
             
-            let imageObject:PFObject = self.efmKnitsResultsArray[indexPath.row] as PFObject
+            let imageObject:PFObject = self.efmSweaterResultsArray[indexPath.row] as PFObject
             
-            let imageFile:PFFile = imageObject.objectForKey("knitImage") as PFFile
+            let imageFile:PFFile = imageObject.objectForKey("Image") as PFFile
             
             
             imageFile.getDataInBackgroundWithBlock({ (data: NSData!, error: NSError!) -> Void in
@@ -212,7 +212,7 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
                     
                     
                     // Grab related PFObject
-                    var objectData:PFObject = self.efmKnitsResultsArray[indexPath.row] as PFObject
+                    var objectData:PFObject = self.efmSweaterResultsArray[indexPath.row] as PFObject
                     
                     // Pass PFObject to second ViewController
                     let theDestination = (segue.destinationViewController as SeaterDetailsVC)
@@ -224,15 +224,6 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     
     
-    @IBOutlet weak var done: UIBarButtonItem!
-    
-    @IBAction func doneAction(sender: UIBarButtonItem) {
-        //self.performSegueWithIdentifier("idSecondSegueUnwind", sender: self)
-        self.presentingViewController?.dismissViewControllerAnimated( false , completion: nil)
-        
-        
-        
-    }
-    
+      
     
 }

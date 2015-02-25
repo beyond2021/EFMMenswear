@@ -28,7 +28,7 @@ class SeaterDetailsVC: UIViewController {
     
     @IBOutlet weak var applePayButtonLabel: UIButton!
     
-    @IBOutlet weak var applePayButtonAction: UIButton!
+   
     
     @IBOutlet weak var featureLabel: UILabel!
     
@@ -115,8 +115,12 @@ class SeaterDetailsVC: UIViewController {
         
     }
     
-    @IBAction func purchase(sender: UIButton) {
-        // TODO: - Fill in implementation
+    @IBAction func swipeBack(sender: UISwipeGestureRecognizer) {
+        
+        navigationController!.popViewControllerAnimated(true)
+        
+        
     }
-
+    
+  
 }

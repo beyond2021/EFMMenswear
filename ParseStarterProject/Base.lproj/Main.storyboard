@@ -20,16 +20,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="EFM Collection" id="AFP-FN-7zV"/>
                     <navigationItem key="navigationItem" id="1Og-DV-b3H"/>
-                    <connections>
-                        <segue destination="P81-l9-bY6" kind="show" identifier="outerwearSegue" id="9O5-NJ-qG8"/>
-                        <segue destination="4Ad-Jn-2v7" kind="show" identifier="sweaterSegue" id="AG5-XN-avc"/>
-                        <segue destination="E70-Iz-3kN" kind="show" identifier="trousersSegue" id="7DC-Ww-bhk"/>
-                        <segue destination="x6T-GG-4Xl" kind="presentation" identifier="idSecondSegue" id="EWP-JR-5r6"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgi-FR-3Ms" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="-1837.5"/>
+            <point key="canvasLocation" x="-414" y="-2761.5"/>
         </scene>
         <!--Knits Collection View Controller-->
         <scene sceneID="NzH-iT-iPI">
@@ -43,7 +37,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G1b-4a-AZH">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G1b-4a-AZH">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wx6-CC-3h0">
                                     <size key="itemSize" width="323" height="572"/>
@@ -107,16 +101,9 @@
                             <constraint firstItem="G1b-4a-AZH" firstAttribute="leading" secondItem="4ny-he-dlX" secondAttribute="leading" id="asd-KA-big"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="uwB-aM-9CP">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="jsj-oi-CxT">
-                            <connections>
-                                <action selector="doneAction:" destination="KZ4-zE-KNJ" id="86b-TB-vml"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="uwB-aM-9CP"/>
                     <connections>
                         <outlet property="EFMCollectionView" destination="G1b-4a-AZH" id="vb5-Dx-1df"/>
-                        <outlet property="done" destination="jsj-oi-CxT" id="CAV-Sb-ONB"/>
                         <segue destination="E1k-4C-j4T" kind="unwind" identifier="idFirstSegueUnwind" unwindAction="returnFromSegueActions:" id="BSS-PB-T7F"/>
                     </connections>
                 </viewController>
@@ -177,7 +164,8 @@
                                         <exclude reference="dhh-NR-fkh"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="149" y="700" width="104" height="38"/>
                                     <mask key="constraints">
                                         <include reference="dhh-NR-fkh"/>
                                     </mask>
@@ -198,7 +186,8 @@
                                         <exclude reference="DAg-U1-8sX"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="125" y="746" width="153" height="30"/>
                                     <mask key="constraints">
                                         <include reference="DAg-U1-8sX"/>
                                     </mask>
@@ -218,6 +207,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="XzZ-VA-fdD" secondAttribute="centerX" id="05n-yv-P4P">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
@@ -304,6 +294,9 @@
                                 <exclude reference="oHh-0B-1l8"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="BWb-WB-txu" appends="YES" id="s8U-rT-Gef"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="l1f-bg-3Qp" id="Wrh-0t-V28"/>
@@ -313,6 +306,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1bN-jn-1l9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="BWb-WB-txu">
+                    <connections>
+                        <action selector="swipeBack:" destination="LPe-Ve-1VS" id="adJ-La-uA8"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3639" y="-2963.25"/>
         </scene>
@@ -332,26 +330,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sbo-T3-ZKB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9546" y="-330"/>
-        </scene>
-        <!--Item 2-->
-        <scene sceneID="xIR-sQ-XN4">
-            <objects>
-                <viewController id="Lpf-6G-4YW" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="XbE-hq-aF2"/>
-                        <viewControllerLayoutGuide type="bottom" id="FL4-Z8-wil"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rUs-MQ-n6p">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="ioJ-Vg-CHM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8RW-vp-9Ew" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="529" y="487"/>
+            <point key="canvasLocation" x="10464" y="-330"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7qt-Wx-eCF">
@@ -364,13 +343,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="RFv-2h-A9A" kind="relationship" relationship="viewControllers" id="v84-Ue-vr3"/>
-                        <segue destination="Lpf-6G-4YW" kind="relationship" relationship="viewControllers" id="thf-Il-Q4I"/>
+                        <segue destination="x6T-GG-4Xl" kind="relationship" relationship="viewControllers" id="pMC-R0-ken"/>
+                        <segue destination="P81-l9-bY6" kind="relationship" relationship="viewControllers" id="ZpP-tR-4a0"/>
+                        <segue destination="3uP-k0-Z9D" kind="relationship" relationship="viewControllers" id="6dm-fp-eiR"/>
+                        <segue destination="mTi-zl-bsU" kind="relationship" relationship="viewControllers" id="xyE-iy-ok1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ne6-mq-vix" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-744" y="-135"/>
+            <point key="canvasLocation" x="72" y="-1749"/>
         </scene>
         <!--Outerwear View Controlleb-->
         <scene sceneID="lkC-A5-axE">
@@ -448,13 +429,7 @@
                             <constraint firstAttribute="trailing" secondItem="mfD-TG-EO9" secondAttribute="trailing" id="k05-of-LU2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Iht-OY-eaX">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="MqF-Hs-a2Z">
-                            <connections>
-                                <action selector="doneAction:" destination="HKh-pq-MbG" id="g3s-Ww-InE"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Iht-OY-eaX"/>
                     <connections>
                         <outlet property="EFMCollectionView" destination="mfD-TG-EO9" id="8xJ-bM-Z6F"/>
                     </connections>
@@ -556,6 +531,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="AQZ-V4-AIr" firstAttribute="leading" secondItem="F7X-An-Rqj" secondAttribute="leading" constant="16" id="6QL-bg-grN"/>
                             <constraint firstItem="AQZ-V4-AIr" firstAttribute="width" relation="lessThanOrEqual" secondItem="lXb-Gr-56m" secondAttribute="width" id="9NG-mW-ziL"/>
@@ -642,6 +618,9 @@
                                 <exclude reference="rYw-4t-rfK"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="V1A-jq-RJ3" appends="YES" id="iw6-u5-leL"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="AQZ-V4-AIr" id="GZ8-dP-d91"/>
@@ -651,6 +630,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6h-3i-rXU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="V1A-jq-RJ3">
+                    <connections>
+                        <action selector="swipeBack:" destination="3s3-c2-TwM" id="zkZ-pg-XJV"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3675" y="-2225.25"/>
         </scene>
@@ -684,7 +668,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="9LD-ow-5v9" kind="show" identifier="showDetail" id="zSC-S6-qjf"/>
+                                            <segue destination="9LD-ow-5v9" kind="show" identifier="sweaterSegue" id="aLh-20-zQS"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -730,21 +714,14 @@
                             <constraint firstAttribute="bottom" secondItem="JWi-Lu-Cgq" secondAttribute="bottom" id="fES-Y5-fGo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8Ad-1Z-JWL">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="gRT-cz-fSU">
-                            <connections>
-                                <action selector="doneAction:" destination="4Ad-Jn-2v7" id="QZR-he-Uwr"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="8Ad-1Z-JWL"/>
                     <connections>
                         <outlet property="EFMCollectionView" destination="JWi-Lu-Cgq" id="7bf-zE-Sdm"/>
-                        <outlet property="done" destination="gRT-cz-fSU" id="xvo-cA-hUf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mmt-LQ-bBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="-1479.75"/>
+            <point key="canvasLocation" x="2841" y="-1482.75"/>
         </scene>
         <!--Seater DetailsVC-->
         <scene sceneID="0gC-1s-gXt">
@@ -769,8 +746,7 @@
                                         <exclude reference="jZQ-Mi-gk4"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="80" width="368" height="173"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="OR3-E8-RE1"/>
                                         <include reference="jZQ-Mi-gk4"/>
@@ -840,6 +816,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="cWb-lM-c0n" firstAttribute="leading" secondItem="ZCH-6u-bcg" secondAttribute="leading" constant="16" id="194-mQ-whf"/>
                             <constraint firstItem="cWb-lM-c0n" firstAttribute="top" secondItem="Nes-8K-4PI" secondAttribute="bottom" constant="31" id="4la-Qj-nXd"/>
@@ -926,17 +903,25 @@
                                 <include reference="zip-wr-iRS"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="L8X-Vh-y3y" appends="YES" id="tza-MS-8fv"/>
+                        </connections>
                     </view>
                     <connections>
-                        <outlet property="descriptionLabel" destination="cWb-lM-c0n" id="rtu-Eh-2F7"/>
-                        <outlet property="efmImageView" destination="Nes-8K-4PI" id="Ifb-eT-WGC"/>
-                        <outlet property="featureLabel" destination="rmZ-Fe-wrQ" id="jMN-HG-VLL"/>
-                        <outlet property="priceLabel" destination="62F-Tz-Ojv" id="fQw-Z4-0KN"/>
+                        <outlet property="descriptionLabel" destination="cWb-lM-c0n" id="s1y-X3-68H"/>
+                        <outlet property="efmImageView" destination="Nes-8K-4PI" id="qJB-D3-eIF"/>
+                        <outlet property="featureLabel" destination="rmZ-Fe-wrQ" id="eEI-Fh-hq8"/>
+                        <outlet property="priceLabel" destination="62F-Tz-Ojv" id="IW2-tQ-iWQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0g-Us-Hgz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="L8X-Vh-y3y">
+                    <connections>
+                        <action selector="swipeBack:" destination="9LD-ow-5v9" id="mon-Kp-ByS"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2793" y="-1487.25"/>
+            <point key="canvasLocation" x="3709.5" y="-1504.5"/>
         </scene>
         <!--Trousers View Controller-->
         <scene sceneID="e74-iz-vXX">
@@ -968,7 +953,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="iRI-CU-qPn" kind="show" identifier="showDetail" id="kyg-9A-LHK"/>
+                                            <segue destination="iRI-CU-qPn" kind="show" identifier="trousersSegue" id="xfK-aJ-jjT"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1014,21 +999,14 @@
                             <constraint firstAttribute="bottom" secondItem="L0Y-Ia-RYs" secondAttribute="bottom" id="cVC-jN-xto"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="lRq-FO-o0i">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="ZCh-vF-v4E">
-                            <connections>
-                                <action selector="doneAction:" destination="E70-Iz-3kN" id="JUV-er-oZq"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="lRq-FO-o0i"/>
                     <connections>
                         <outlet property="EFMCollectionView" destination="L0Y-Ia-RYs" id="zJG-pl-xXP"/>
-                        <outlet property="done" destination="ZCh-vF-v4E" id="dgs-1J-CWl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0S-r0-Qhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2022" y="-723.75"/>
+            <point key="canvasLocation" x="2940" y="-723.75"/>
         </scene>
         <!--Trousers DeatailVC-->
         <scene sceneID="j15-KJ-M24">
@@ -1053,8 +1031,7 @@
                                         <exclude reference="eCu-GY-XYW"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="16" y="80" width="368" height="173"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="Eml-vT-Dyi"/>
                                         <include reference="eCu-GY-XYW"/>
@@ -1110,6 +1087,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <action selector="applePay:" destination="iRI-CU-qPn" eventType="touchUpInside" id="hw3-ah-Rlg"/>
                                     <action selector="purchase:" destination="iRI-CU-qPn" eventType="touchUpInside" id="8ED-Fg-dF7"/>
                                 </connections>
                             </button>
@@ -1124,6 +1102,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Mq3-6x-4hS" firstAttribute="top" secondItem="xTw-YL-QPg" secondAttribute="bottom" constant="94" id="06t-j0-pqb"/>
                             <constraint firstItem="xTw-YL-QPg" firstAttribute="top" secondItem="YGt-uG-lik" secondAttribute="bottom" constant="167" id="2GT-8k-Yty"/>
@@ -1210,22 +1189,31 @@
                                 <exclude reference="Iyl-In-Lhd"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="pg6-nw-neE" appends="YES" id="Hl2-EP-j3j"/>
+                        </connections>
                     </view>
                     <connections>
-                        <outlet property="descriptionLabel" destination="YGt-uG-lik" id="w30-Db-Zqb"/>
-                        <outlet property="efmImageView" destination="0ls-2d-iwz" id="WJV-2n-PTk"/>
-                        <outlet property="featureLabel" destination="xTw-YL-QPg" id="btb-er-gD9"/>
-                        <outlet property="priceLabel" destination="Orq-50-akS" id="yJ6-QK-CeK"/>
+                        <outlet property="descriptionLabel" destination="YGt-uG-lik" id="o7o-z7-T8g"/>
+                        <outlet property="efmImageView" destination="0ls-2d-iwz" id="I23-bB-cJ5"/>
+                        <outlet property="featureLabel" destination="xTw-YL-QPg" id="ePh-FS-QpS"/>
+                        <outlet property="priceLabel" destination="Orq-50-akS" id="pK5-xp-Qx9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CYs-ff-0CU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="pg6-nw-neE">
+                    <connections>
+                        <action selector="swipeBack:" destination="iRI-CU-qPn" id="rlO-P8-6R7"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2853" y="-719.25"/>
+            <point key="canvasLocation" x="3771" y="-719.25"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Outerwear-->
         <scene sceneID="FHC-wh-NQL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="P81-l9-bY6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Outerwear" id="FQH-cA-3wr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NDA-v9-b1L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1242,10 +1230,11 @@
             </objects>
             <point key="canvasLocation" x="1914" y="-2217.75"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Knits-->
         <scene sceneID="pyp-Vd-oMD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="x6T-GG-4Xl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Knits" id="TOL-Lm-Iiu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rZB-yc-iP3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1259,6 +1248,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i8n-Oy-9Rc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1890" y="-2967.75"/>
+        </scene>
+        <!--Sweaters-->
+        <scene sceneID="fTD-Xb-iYb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3uP-k0-Z9D" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Sweaters" id="jd4-9q-M2b"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RTB-Jc-jwC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4Ad-Jn-2v7" kind="relationship" relationship="rootViewController" id="YX9-H0-hgQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WnG-yT-3wf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1923" y="-1482.75"/>
+        </scene>
+        <!--Trousers-->
+        <scene sceneID="EGV-nm-WYT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mTi-zl-bsU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Trousers" id="pdY-IA-lTy"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tJq-fH-9hp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="E70-Iz-3kN" kind="relationship" relationship="rootViewController" id="CSG-EM-hTS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HFY-Nr-qfk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2022" y="-723.75"/>
         </scene>
     </scenes>
 </document>

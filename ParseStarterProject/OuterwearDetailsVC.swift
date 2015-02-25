@@ -115,9 +115,13 @@ class OuterwearDetailsVC: UIViewController {
         
     }
     
-    @IBAction func purchase(sender: UIButton) {
-        // TODO: - Fill in implementation
+    @IBAction func swipeBack(sender: UISwipeGestureRecognizer) {
+        
+        navigationController!.popViewControllerAnimated(true)
+        
+        
     }
-
-
+    
+    
+   
 }

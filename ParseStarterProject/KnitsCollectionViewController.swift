@@ -15,9 +15,6 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     var EFMImage = UIImage()
     
-   // var pHoto = EFMPhoto()
-   // var downloader = KeevParseDownloader?()
-    
     
     @IBOutlet weak var EFMCollectionView: UICollectionView!
  
@@ -70,19 +67,13 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
 
     
     func parseDataArray(sender: KeevParseDownloader) -> AnyObject?{
-        //  println("Our result is :\(sender.resultsArray)")
+        
         efmKnitsResultsArray = sender.resultsArray
         self.EFMCollectionView.reloadData()
-        
-        
-        
-        
-        
-        
-        
-        return sender.resultsArray
+               return sender.resultsArray
     }
     func receiveDataStopSpinner(){
+      
         
     }
     func noDataShowError(){
@@ -95,18 +86,21 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController!.navigationBar.barTintColor = UIColor.grayColor()
+        tabBarController!.tabBar.barTintColor = UIColor.clearColor()
+        tabBarController!.tabBar.tintColor = UIColor.redColor()
+        
+//        navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "DroidSerif", size: 20)]
         self.title = "KNITS"
         
         //self.navigationController?.navigationBarHidden = true;
         EFMCollectionView.dataSource = self
         EFMCollectionView.delegate = self
-        //loadPhotos()
-       // queryParseMethod()
         
        getTheData()
-        
-        
-          }
+               }
+    
+    
     
     func getTheData(){
         
@@ -243,7 +237,6 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     }
     
-       
-    
+      
     
 }

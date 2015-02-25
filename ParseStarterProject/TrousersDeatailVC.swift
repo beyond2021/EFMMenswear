@@ -25,10 +25,7 @@ class TrousersDeatailVC: UIViewController {
     
     @IBOutlet weak var efmImageView: UIImageView!
     
-    @IBOutlet weak var applePayButtonLabel: UIButton!
-    
-    @IBOutlet weak var applePayButtonAction: UIButton!
-    
+        
     @IBOutlet weak var featureLabel: UILabel!
     
     
@@ -36,7 +33,7 @@ class TrousersDeatailVC: UIViewController {
     var swag: PFObject! {
         didSet {
             // Update the view.
-            println("The swag is set")
+           // println("The swag is set")
             
             
             self.configureView()
@@ -114,8 +111,16 @@ class TrousersDeatailVC: UIViewController {
         
     }
     
-    @IBAction func purchase(sender: UIButton) {
-        // TODO: - Fill in implementation
+  
+    
+    @IBAction func applePay(sender: AnyObject) {
     }
-
+    
+    @IBAction func swipeBack(sender: UISwipeGestureRecognizer) {
+        
+        navigationController!.popViewControllerAnimated(true)
+        
+        
+    }
+    
 }
