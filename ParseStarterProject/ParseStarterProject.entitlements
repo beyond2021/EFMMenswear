@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>com.apple.developer.in-app-payments</key>
-	<array/>
+	<array>
+		<string>merchant.com.EFMMerchantID</string>
+	</array>
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)com.beyond202.EFMMenswear</string>
