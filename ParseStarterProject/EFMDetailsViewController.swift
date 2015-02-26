@@ -10,6 +10,10 @@ import UIKit
 import Parse
 import PassKit
 
+
+
+
+
 extension EFMDetailsViewController: PKPaymentAuthorizationViewControllerDelegate {
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didAuthorizePayment payment: PKPayment!, completion: ((PKPaymentAuthorizationStatus) -> Void)!) {
         completion(PKPaymentAuthorizationStatus.Success)
@@ -17,6 +21,16 @@ extension EFMDetailsViewController: PKPaymentAuthorizationViewControllerDelegate
     
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((status: PKPaymentAuthorizationStatus, shippingMethods: [AnyObject]!, summaryItems: [AnyObject]!) -> Void)!) {
+        completion(status:PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems:calculateSummaryItemsFromSwag(swag))
+        let shippingAddress = createShippingAddressFromRef(address)
+        switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
+        case (.Some(let state), .Some(let city), .Some(let zip)):
+            completion(status: PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems: nil)
+        default:
+            completion(status: PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, shippingMethods: nil, summaryItems: nil)
+        }
     }
 }
 
@@ -38,9 +52,10 @@ class EFMDetailsViewController: UIViewController {
     
     @IBOutlet weak var featureLabel: UILabel!
     
-    let shippingPrice: NSDecimalNumber = NSDecimalNumber(string: "5.0")
+    let shippingPrice: NSDecimalNumber = NSDecimalNumber(string: "20.0")
     
-    var deliveryType: DeliveryType = DeliveryType.toDelivered
+    var deliveryType: DeliveryType = DeliveryType.toDelivered(method: ShippingMethod.ShippingMethodOptions.first!)
+    
     
     
     var swag: PFObject! {
@@ -126,6 +141,19 @@ class EFMDetailsViewController: UIViewController {
         request.countryCode = "US"
         request.currencyCode = "USD"
         //
+        request.requiredShippingAddressFields = PKAddressField.All
+        
+        request.paymentSummaryItems = calculateSummaryItemsFromSwag(swag)        
+        
+        let applePayController = PKPaymentAuthorizationViewController(paymentRequest: request)
+        
+        
+        self.presentViewController(applePayController, animated: true, completion: nil)
+        applePayController.delegate = self
+         }
+    
+    func calculateSummaryItemsFromSwag(swag: PFObject) -> [PKPaymentSummaryItem] {
+        var summaryItems = [PKPaymentSummaryItem]()
         let efmTitle = swag.objectForKey("Title") as String!
         let price = swag.objectForKey("Price") as NSNumber
         var priceString: NSString {
@@ -134,59 +162,50 @@ class EFMDetailsViewController: UIViewController {
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        
-        
         var priceNumber =  NSDecimalNumber( string: priceString)
-        
-        switch (deliveryType) {
-        case DeliveryType.toDelivered:
-            request.requiredShippingAddressFields = PKAddressField.PostalAddress | PKAddressField.Phone
-        case DeliveryType.pickUp:
-            request.requiredShippingAddressFields = PKAddressField.Email
-        }
-        request.requiredShippingAddressFields = PKAddressField.All
-        
-        var summaryItems = [PKPaymentSummaryItem]()
         summaryItems.append(PKPaymentSummaryItem(label: efmTitle, amount: priceNumber))
-        
-        if (deliveryType == DeliveryType.toDelivered) {
-            summaryItems.append(PKPaymentSummaryItem(label: "Shipping", amount: priceNumber))
+        switch (deliveryType) {
+        case DeliveryType.toDelivered(let method):
+            summaryItems.append(PKPaymentSummaryItem(label: "Shipping", amount: method.method.price))
+        case DeliveryType.pickUp:
+            break
         }
-        
         summaryItems.append(PKPaymentSummaryItem(label: "EFM Menswear", amount: total()))
-        
-        request.paymentSummaryItems = summaryItems
-        let applePayController = PKPaymentAuthorizationViewController(paymentRequest: request)
-        
-        
-        self.presentViewController(applePayController, animated: true, completion: nil)
-        applePayController.delegate = self
-        
-    
+        return summaryItems
     }
     
+    
     func total() -> NSDecimalNumber {
-        
         let price = swag.objectForKey("Price") as NSNumber
         var priceString: NSString {
             let dollarFormatter: NSNumberFormatter = NSNumberFormatter()
             dollarFormatter.minimumFractionDigits = 2;
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
-            
         }
         var priceNumber =  NSDecimalNumber( string: priceString)
-        
-        if (deliveryType == DeliveryType.toDelivered) {
-            
-            return priceNumber.decimalNumberByAdding(shippingPrice)
-        } else {
+        switch (deliveryType) {
+        case DeliveryType.toDelivered(let deliveryType):
+            return priceNumber.decimalNumberByAdding(deliveryType.method.price)
+        case DeliveryType.pickUp:
             return priceNumber
         }
     }
     
     
-    
+    func createShippingAddressFromRef(address: ABRecord!) -> Address {
+        var shippingAddress: Address = Address()
+        shippingAddress.FirstName = ABRecordCopyValue(address, kABPersonFirstNameProperty)?.takeRetainedValue() as? String
+        shippingAddress.LastName = ABRecordCopyValue(address, kABPersonLastNameProperty)?.takeRetainedValue() as? String
+        let addressProperty : ABMultiValueRef = ABRecordCopyValue(address, kABPersonAddressProperty).takeUnretainedValue() as ABMultiValueRef
+        if let dict : NSDictionary = ABMultiValueCopyValueAtIndex(addressProperty, 0).takeUnretainedValue() as? NSDictionary {
+            shippingAddress.Street = dict[String(kABPersonAddressStreetKey)] as? String
+            shippingAddress.City = dict[String(kABPersonAddressCityKey)] as? String
+            shippingAddress.State = dict[String(kABPersonAddressStateKey)] as? String
+            shippingAddress.Zip = dict[String(kABPersonAddressZIPKey)] as? String
+        }
+        return shippingAddress
+    }
     
     
     

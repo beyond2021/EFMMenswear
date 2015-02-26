@@ -10,9 +10,28 @@ import Foundation
 import Parse
 
 
-/*
+
+struct ShippingMethod {
+    let price: NSDecimalNumber
+    let title: String
+    let description: String
+    
+    init(price: NSDecimalNumber, title: String, description: String) {
+        self.price = price
+        self.title = title
+        self.description = description
+    }
+    
+    static let ShippingMethodOptions = [
+        ShippingMethod(price: NSDecimalNumber(string: "5.00"), title: "Carrier Pigeon", description: "You'll get it someday."),
+        ShippingMethod(price: NSDecimalNumber(string: "100.00"), title: "Racecar", description: "Vrrrroom! Get it by tomorrow!"),
+        ShippingMethod(price: NSDecimalNumber(string: "9000000.00"), title: "Rocket Ship", description: "Look out your window!"),
+        ShippingMethod(price: NSDecimalNumber(string: "0.00"), title: "Pick it up at the store", description: "285 West broadway suite 620 NY 10013"),
+    ]
+}
+
 enum DeliveryType {
-    case toDelivered
+    case toDelivered(method: ShippingMethod)
     case pickUp
     
 }
@@ -25,7 +44,7 @@ func ==(lhs: DeliveryType, rhs: DeliveryType) -> Bool {
     default: return false
     }
 }
-*/
+
 
 class EFMPhoto  {
     

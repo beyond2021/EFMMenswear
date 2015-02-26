@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2209DEE11A9D90BD00F388D3 /* KYCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209DEE01A9D90BD00F388D3 /* KYCircularProgress.swift */; };
+		2209DEE61A9F440200F388D3 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209DEE51A9F440200F388D3 /* Address.swift */; };
 		220EED091A95F51C008AE372 /* EFMDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */; };
 		220EED0B1A9684B3008AE372 /* KeevParseDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EED0A1A9684B3008AE372 /* KeevParseDownloader.swift */; };
 		221A37081A8C546B00B4D508 /* EFM_Launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 221A37071A8C546B00B4D508 /* EFM_Launch.jpg */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		2209DEE01A9D90BD00F388D3 /* KYCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYCircularProgress.swift; sourceTree = "<group>"; };
+		2209DEE51A9F440200F388D3 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMDetailsViewController.swift; sourceTree = "<group>"; };
 		220EED0A1A9684B3008AE372 /* KeevParseDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeevParseDownloader.swift; sourceTree = "<group>"; };
 		221A37071A8C546B00B4D508 /* EFM_Launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = EFM_Launch.jpg; sourceTree = "<group>"; };
@@ -167,6 +169,14 @@
 			name = ProgressView;
 			sourceTree = "<group>";
 		};
+		2209DEE41A9F43B300F388D3 /* Address vaerfication */ = {
+			isa = PBXGroup;
+			children = (
+				2209DEE51A9F440200F388D3 /* Address.swift */,
+			);
+			name = "Address vaerfication";
+			sourceTree = "<group>";
+		};
 		221A37061A8C544900B4D508 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +276,7 @@
 		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
 			isa = PBXGroup;
 			children = (
+				2209DEE41A9F43B300F388D3 /* Address vaerfication */,
 				22C790821A9C65C100B0C5FB /* ViewControllers */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
@@ -464,6 +475,7 @@
 				22C7907E1A9C46DB00B0C5FB /* SecondCustomSegue.swift in Sources */,
 				228DF8B91A90A6C100D03FA5 /* EFMPhoto.swift in Sources */,
 				2209DEE11A9D90BD00F388D3 /* KYCircularProgress.swift in Sources */,
+				2209DEE61A9F440200F388D3 /* Address.swift in Sources */,
 				220EED0B1A9684B3008AE372 /* KeevParseDownloader.swift in Sources */,
 				22FACF3A1A8C715D0066163C /* LaunchViewController.swift in Sources */,
 				22FACF3C1A8DD50D0066163C /* KnitsCollectionViewController.swift in Sources */,
