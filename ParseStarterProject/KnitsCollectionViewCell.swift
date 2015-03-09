@@ -18,25 +18,15 @@ class KnitsCollectionViewCell: UICollectionViewCell {
             return self.image
         }
         set{
-            
             self.imageView.image = newValue
-            
-            
             if imageOffset != nil{
-                
                 setImageOffset(imageOffset)
-                
             } else
             {
                 setImageOffset(CGPointMake(0, 0))
-                
             }
-            
-        }
-        
-        
-        
-    }
+                }
+            }
     
     var imageOffset:CGPoint!
     
@@ -56,11 +46,8 @@ class KnitsCollectionViewCell: UICollectionViewCell {
         
     }
     func setUpImageView(){
-        
         self.clipsToBounds = true
         imageView = UIImageView(frame:CGRectMake(self.bounds.origin.x,  self.bounds.origin.y, 375, 562 ))
-        // imageView = UIImageView(frame:CGRectMake(0,  0, 375, 200))
-        
         imageView.contentMode = UIViewContentMode.ScaleAspectFill
         imageView.clipsToBounds = false
         self.addSubview(imageView)
@@ -72,13 +59,10 @@ class KnitsCollectionViewCell: UICollectionViewCell {
         
         self.imageOffset = imageOffset
         if imageView != nil{
-            
             let frame:CGRect = imageView.bounds
             //Next let create an offset frame
             let offset:CGRect = CGRectOffset(frame, self.imageOffset.x - 25, self.imageOffset.y)
             imageView.frame = offset
         }
-        
-        
     }
 }

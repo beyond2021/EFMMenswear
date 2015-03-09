@@ -175,5 +175,9 @@ class TrousersDeatailVC: UIViewController {
         
         
     }
+    override func viewWillDisappear(animated: Bool) {
+        navigationController!.popViewControllerAnimated(true)
+    }
+    
     
 }
