@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class MainView: UIView {
     let applePayButton: UIButton!
@@ -26,9 +27,9 @@ class MainView: UIView {
         
         let image = UIImage(named: "ApplePaySwagButton") as UIImage?
         let applePayButton  = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        applePayButton.frame = CGRectMake(75, 560, 160, 34)
+        applePayButton.frame = CGRectMake(75, 560, 140, 34)
         applePayButton.setImage(image, forState: .Normal)
-        
+        applePayButton.sizeToFit()
         
         applePayButton.setTitle("Buy With Apple Pay", forState: UIControlState.Normal)
         
@@ -84,6 +85,12 @@ class MainView: UIView {
         
         
     }
+    
+            
+        
+        
+        
+   // }
 
     
     

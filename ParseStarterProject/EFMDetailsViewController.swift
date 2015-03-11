@@ -80,10 +80,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
             return
         }
         
-      // let bigView = MainView( coder: NSCoder())
-        
-        
-        
+      getPhotoArray()
         
         self.title = swag.objectForKey("Title") as String!
        let price = swag.objectForKey("Price") as NSNumber
@@ -134,6 +131,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
         super.viewDidLoad()
         
        self .configureView()
+        getPhotoArray()
         
         let bounds:CGRect = self.view.bounds
         canvasView = UIView(frame: bounds)
@@ -214,6 +212,124 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
 //        
         
             }
+    
+    func getPhotoArray(){
+        
+        let imageFile:PFFile = swag.objectForKey("Image") as PFFile
+        
+        
+        if    let viewImageFiles = swag.relationForKey("AlternativeViews") as PFRelation! {
+            
+//            let query = viewImageFiles.query()
+//            query.whereKey("KnitImages", equalTo: "Image1")
+//            
+//           // println("Image1 :\(query)")
+//            query.whereKey("KnitImages", equalTo: "Image2")
+//           // println("Image2 :\(query)")
+            
+             println("viewImageFiles :\(viewImageFiles)")
+            
+            // To acess the data from the relation object
+            
+//            PFRelation *relationObj = [getImageObject relationForKey:@"locationImages"];
+//            PFQuery *query1 = [relationObj query];
+//            [query1 findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+//            
+//            [locationImagesArray addObjectsFromArray:results];
+//            for (int imgCount = 0; imgCount < [locationImagesArray count]; imgCount ++) {
+//            
+//            PFFile *getImage1 = [[locationImagesArray valueForKey:@"Image"] objectAtIndex:imgCount];
+//            [getImage1 getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+//            {
+//            
+//            if (imageData!=nil) {
+//            UIImage *image = [UIImage imageWithData:imageData];
+//            activityImage.image = image;
+//            
+//            NSLog(@"location image output");
+//            
+//            NSLog(@"location image output : %@", activityImage.image);
+//            
+//            }
+//            }];
+//            
+//            }
+            
+            
+//Bit
+            
+            
+           let query1 = viewImageFiles.query()
+            query1.findObjectsInBackgroundWithBlock({ (results, error: NSError?) -> Void in
+                if (error ==  nil)
+                    
+                {
+                    
+                    println(query1)
+                    
+                }
+                    
+                else
+                    
+                {
+                    
+                    println("ERROR LOAD")
+                    
+                }
+                
+ 
+                
+                
+                
+            })
+            
+            
+            
+        } else {
+            
+            println("The relation is nil")
+        }
+
+        
+        
+        let queue:dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        
+        dispatch_async(queue, { () -> Void in
+            
+            var error:NSError?
+            
+            let imageObject:PFRelation = self.swag.relationForKey("AlternativeViews") as PFRelation
+            
+         //   let imageFile:PFFile = imageObject.rel("Image") as PFFile
+            
+            
+            imageFile.getDataInBackgroundWithBlock({ (data: NSData!, error: NSError!) -> Void in
+                
+                let imageData:NSData = data
+                
+                //let image:UIImage = UIImage(data: imageData)!
+           //     self.EFMImage = UIImage(data: imageData)!
+                
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    // cell.image = image
+             //       cell.image = self.EFMImage
+                    
+                    
+              //      let yOffset:CGFloat = ((collectionView.contentOffset.y - cell.frame.origin.y) / 200) * 5
+                    
+               //     cell.imageOffset = CGPointMake(0, yOffset)
+                    
+                    
+                })
+                
+            })
+        })
+    }
+    
+    
+    
     
         
     override func viewWillDisappear(animated: Bool) {

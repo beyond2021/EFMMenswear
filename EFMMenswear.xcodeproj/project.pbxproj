@@ -85,7 +85,6 @@
 		221A37071A8C546B00B4D508 /* EFM_Launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = EFM_Launch.jpg; sourceTree = "<group>"; };
 		221A37091A8C5BEF00B4D508 /* DonradInfo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = DonradInfo.jpg; sourceTree = "<group>"; };
 		221A370A1A8C5BEF00B4D508 /* EFMLOGO.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = EFMLOGO.jpg; sourceTree = "<group>"; };
-		221F1D301AA88EDE00720CB8 /* Objective-CBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objective-CBridgingHeader.h"; sourceTree = "<group>"; };
 		221F1D3D1AA8972B00720CB8 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		221F1D3E1AA8972B00720CB8 /* forest.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = forest.jpg; sourceTree = "<group>"; };
 		221F1D3F1AA8972B00720CB8 /* dock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dock.jpg; sourceTree = "<group>"; };
@@ -237,14 +236,6 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		221F1D241AA8898900720CB8 /* Bridge */ = {
-			isa = PBXGroup;
-			children = (
-				221F1D301AA88EDE00720CB8 /* Objective-CBridgingHeader.h */,
-			);
-			name = Bridge;
-			sourceTree = "<group>";
-		};
 		221F1D311AA88EFA00720CB8 /* Parallax */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,7 +332,6 @@
 				22D819F81AAC96C900EF2420 /* Overlay */,
 				221F1D3C1AA896D500720CB8 /* Images */,
 				221F1D311AA88EFA00720CB8 /* Parallax */,
-				221F1D241AA8898900720CB8 /* Bridge */,
 				2209DF4A1AA12C7900F388D3 /* PullToRefresh */,
 				2209DEDF1A9D908800F388D3 /* ProgressView */,
 				22C790791A9C466400B0C5FB /* Custom Segues */,

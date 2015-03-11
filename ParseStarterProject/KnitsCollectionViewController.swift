@@ -90,11 +90,11 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         super.viewDidLoad()
         
         
-        EFMCollectionView.addPullToRefresh({ [weak self] in
-            // some code
-            sleep(1)
-            self?.EFMCollectionView.reloadData()
-        })
+//        EFMCollectionView.addPullToRefresh({ [weak self] in
+//            // some code
+//            sleep(1)
+//            self?.EFMCollectionView.reloadData()
+//        })
         navigationController!.navigationBar.barTintColor = UIColor.grayColor()
         tabBarController!.tabBar.barTintColor = UIColor.clearColor()
         tabBarController!.tabBar.tintColor = UIColor.redColor()
