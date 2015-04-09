@@ -44,16 +44,16 @@ class EFMOptions: UITableViewController {
     override func loadView() {
         super.loadView()
         descriptionCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        descriptionCell.textLabel.text = "Description"
+        descriptionCell.textLabel?.text = "Description"
         
         
         // construct last name cell, section 0, row 1
         featuresCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-        featuresCell.textLabel.text = "Features And Benefits"
+        featuresCell.textLabel?.text = "Features And Benefits"
         
         
         // construct share cell, section 1, row 0
-        shareCell.textLabel.text = "Share with Friends"
+        shareCell.textLabel?.text = "Share with Friends"
         shareCell.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
         shareCell.accessoryType = UITableViewCellAccessoryType.Checkmark
         
