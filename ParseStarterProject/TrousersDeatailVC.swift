@@ -11,9 +11,78 @@ import Parse
 import PassKit
 
 extension TrousersDeatailVC: PKPaymentAuthorizationViewControllerDelegate {
+//    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didAuthorizePayment payment: PKPayment!, completion: ((PKPaymentAuthorizationStatus) -> Void)!) {
+//        completion(PKPaymentAuthorizationStatus.Success)
+//    }
+    
     func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didAuthorizePayment payment: PKPayment!, completion: ((PKPaymentAuthorizationStatus) -> Void)!) {
-        completion(PKPaymentAuthorizationStatus.Success)
+        //completion(PKPaymentAuthorizationStatus.Success)
+        
+        // 1
+        let shippingAddress = self.createShippingAddressFromRef(payment.shippingAddress)
+        
+        // 2
+        Stripe.setDefaultPublishableKey("pk_test_YOUR_API_KEY")  // Replace With Your Own Key!
+        
+        STPAPIClient.sharedClient().createTokenWithPayment(payment, completion: { (token: STPToken!, error: NSError!) -> Void in
+            
+            
+            //   })
+            if (error != nil) {
+                println(error)
+                completion(PKPaymentAuthorizationStatus.Failure)
+                return
+            }
+            
+            
+            
+            // })
+            // 4
+            let shippingAddress = self.createShippingAddressFromRef(payment.shippingAddress)
+            
+            // 5
+            let url = NSURL(string: "http://10.0.0.133/pay")  // Replace with computers local IP Address!
+            let request = NSMutableURLRequest(URL: url!)
+            request.HTTPMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+            
+            // 6
+            
+            
+            
+            // })
+            
+            let body = ["stripeToken": token.tokenId,
+                
+                "amount": self.total().decimalNumberByMultiplyingBy(NSDecimalNumber(string: "100")),
+                
+                
+                "description": self.swag!.description,
+                "shipping": [
+                    "city": shippingAddress.City!,
+                    "state": shippingAddress.State!,
+                    "zip": shippingAddress.Zip!,
+                    "firstName": shippingAddress.FirstName!,
+                    "lastName": shippingAddress.LastName!]
+            ]
+            
+            var error: NSError?
+            request.HTTPBody = NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions(), error: &error)
+            
+            // 7
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
+                if (error != nil) {
+                    completion(PKPaymentAuthorizationStatus.Failure)
+                } else {
+                    completion(PKPaymentAuthorizationStatus.Success)
+                }
+            }
+        })
+        
     }
+    
+    
     
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
