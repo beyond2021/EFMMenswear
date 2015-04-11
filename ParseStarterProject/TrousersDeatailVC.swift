@@ -22,7 +22,7 @@ extension TrousersDeatailVC: PKPaymentAuthorizationViewControllerDelegate {
         let shippingAddress = self.createShippingAddressFromRef(payment.shippingAddress)
         
         // 2
-        Stripe.setDefaultPublishableKey("pk_test_YOUR_API_KEY")  // Replace With Your Own Key!
+        Stripe.setDefaultPublishableKey("pk_test_10iie7Xp98twCbxCC0njHt8L")  // Replace With Your Own Key!
         
         STPAPIClient.sharedClient().createTokenWithPayment(payment, completion: { (token: STPToken!, error: NSError!) -> Void in
             
@@ -41,7 +41,7 @@ extension TrousersDeatailVC: PKPaymentAuthorizationViewControllerDelegate {
             let shippingAddress = self.createShippingAddressFromRef(payment.shippingAddress)
             
             // 5
-            let url = NSURL(string: "http://10.0.0.133/pay")  // Replace with computers local IP Address!
+            let url = NSURL(string: "http://10.0.0.133:5000/pay")  // Replace with computers local IP Address!
             let request = NSMutableURLRequest(URL: url!)
             request.HTTPMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
