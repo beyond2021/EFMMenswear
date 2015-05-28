@@ -88,15 +88,16 @@ extension SeaterDetailsVC: PKPaymentAuthorizationViewControllerDelegate {
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((status: PKPaymentAuthorizationStatus, shippingMethods: [AnyObject]!, summaryItems: [AnyObject]!) -> Void)!) {
-        completion(status:PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems:calculateSummaryItemsFromSwag(swag))
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((PKPaymentAuthorizationStatus, [AnyObject]!, [AnyObject]!) -> Void)!) {
+        completion(PKPaymentAuthorizationStatus.Success, nil, calculateSummaryItemsFromSwag(swag))
         let shippingAddress = createShippingAddressFromRef(address)
         switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
         case (.Some(let state), .Some(let city), .Some(let zip)):
-            completion(status: PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems: nil)
+            completion(PKPaymentAuthorizationStatus.Success, nil, nil)
         default:
-            completion(status: PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, shippingMethods: nil, summaryItems: nil)
+            completion(PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, nil, nil)
         }
+        
     }
     
 }
@@ -134,8 +135,8 @@ class SeaterDetailsVC: UIViewController {
             return
         }
        
-        self.title = swag.objectForKey("Title") as String!
-        let price = swag.objectForKey("Price") as NSNumber
+        self.title = swag.objectForKey("Title") as! String!
+        let price = swag.objectForKey("Price") as! NSNumber
         
         
         var priceString: NSString {
@@ -146,9 +147,9 @@ class SeaterDetailsVC: UIViewController {
                  }
        
         
-        self.priceLabel.text = "$" + priceString
-        self.descriptionLabel.text = swag.objectForKey("Description") as String!
-        self.featureLabel.text = swag.objectForKey("Features") as String!
+        self.priceLabel.text = "$" + (priceString as String)
+        self.descriptionLabel.text = swag.objectForKey("Description") as! String!
+        self.featureLabel.text = swag.objectForKey("Features") as! String!
         
         
         
@@ -169,11 +170,11 @@ class SeaterDetailsVC: UIViewController {
         dispatch_async(queue, { () -> Void in
             
             var error:NSError?
-            let imageFile:PFFile = self.swag.objectForKey("Image") as PFFile
+            let imageFile:PFFile = self.swag.objectForKey("Image") as! PFFile
             
-            imageFile.getDataInBackgroundWithBlock({ (data: NSData!, error: NSError!) -> Void in
+            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
                 
-                let imageData:NSData = data
+                let imageData:NSData = data!
                 
                 let image:UIImage = UIImage(data: imageData)!
                 dispatch_async(dispatch_get_main_queue(), {
@@ -211,19 +212,19 @@ class SeaterDetailsVC: UIViewController {
     
     func calculateSummaryItemsFromSwag(swag: PFObject) -> [PKPaymentSummaryItem] {
         var summaryItems = [PKPaymentSummaryItem]()
-        let efmTitle = swag.objectForKey("Title") as String!
-        let price = swag.objectForKey("Price") as NSNumber
+        let efmTitle = swag.objectForKey("Title") as! String!
+        let price = swag.objectForKey("Price") as! NSNumber
         var priceString: NSString {
             let dollarFormatter: NSNumberFormatter = NSNumberFormatter()
             dollarFormatter.minimumFractionDigits = 2;
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString)
+        var priceNumber =  NSDecimalNumber( string: priceString as String)
         summaryItems.append(PKPaymentSummaryItem(label: efmTitle, amount: priceNumber))
         switch (deliveryType) {
         case DeliveryType.toDelivered(let method):
-            summaryItems.append(PKPaymentSummaryItem(label: "Shipping", amount: method.method.price))
+            summaryItems.append(PKPaymentSummaryItem(label: "Shipping", amount: method.price))
         case DeliveryType.pickUp:
             break
         }
@@ -233,17 +234,17 @@ class SeaterDetailsVC: UIViewController {
     
     
     func total() -> NSDecimalNumber {
-        let price = swag.objectForKey("Price") as NSNumber
+        let price = swag.objectForKey("Price") as! NSNumber
         var priceString: NSString {
             let dollarFormatter: NSNumberFormatter = NSNumberFormatter()
             dollarFormatter.minimumFractionDigits = 2;
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString)
+        var priceNumber =  NSDecimalNumber( string: priceString as String)
         switch (deliveryType) {
         case DeliveryType.toDelivered(let deliveryType):
-            return priceNumber.decimalNumberByAdding(deliveryType.method.price)
+            return priceNumber.decimalNumberByAdding(deliveryType.price)
         case DeliveryType.pickUp:
             return priceNumber
         }

@@ -81,11 +81,11 @@ public class PullToRefreshView: UIView {
         superview?.removeObserver(self, forKeyPath: contentOffsetKeyPath, context: &kvoContext)
         if (superView != nil && superView is UIScrollView) {
             superView.addObserver(self, forKeyPath: contentOffsetKeyPath, options: .Initial, context: &kvoContext)
-            scrollViewBounces = (superView as UIScrollView).bounces
-            scrollViewInsets = (superView as UIScrollView).contentInset
+            scrollViewBounces = (superView as! UIScrollView).bounces
+            scrollViewInsets = (superView as! UIScrollView).contentInset
             
-            println((superView as UIScrollView).contentOffset.y)
-            println((superView as UIScrollView).contentInset.top)
+            println((superView as! UIScrollView).contentOffset.y)
+            println((superView as! UIScrollView).contentInset.top)
         }
     }
     
@@ -155,7 +155,7 @@ public class PullToRefreshView: UIView {
         self.indicator.startAnimating()
         self.arrow.hidden = true
         
-        var scrollView = superview as UIScrollView
+        var scrollView = superview as! UIScrollView
         var insets = scrollView.contentInset
         insets.top += self.frame.size.height
         scrollView.contentOffset.y = self.previousOffset
@@ -174,7 +174,7 @@ public class PullToRefreshView: UIView {
         self.arrow.transform = CGAffineTransformIdentity
         self.arrow.hidden = false
         
-        var scrollView = superview as UIScrollView
+        var scrollView = superview as! UIScrollView
         scrollView.bounces = self.scrollViewBounces
         UIView.animateWithDuration(PullToRefreshConst.duration, animations: { () -> Void in
             scrollView.contentInset = self.scrollViewInsets
@@ -187,13 +187,13 @@ public class PullToRefreshView: UIView {
         UIView.animateWithDuration(0.2, delay: 0, options:nil, animations: {
             // -0.0000001 for the rotation direction control
             self.arrow.transform = CGAffineTransformMakeRotation(CGFloat(M_PI-0.0000001))
-            }, nil)
+            }, completion: nil)
     }
     
     private func arrowRotationBack() {
         UIView.animateWithDuration(0.2, delay: 0, options:nil, animations: {
             self.arrow.transform = CGAffineTransformIdentity
-            }, nil)
+            }, completion: nil)
     }
 }
 

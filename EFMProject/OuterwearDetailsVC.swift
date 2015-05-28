@@ -1,5 +1,5 @@
 //
-//  TrousersDeatailVC.swift
+//  OuterwearDetailsVC.swift
 //  EFMMenswear
 //
 //  Created by KEEVIN MITCHELL on 2/24/15.
@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import PassKit
 
-extension TrousersDeatailVC: PKPaymentAuthorizationViewControllerDelegate {
+extension OuterwearDetailsVC: PKPaymentAuthorizationViewControllerDelegate {
 //    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didAuthorizePayment payment: PKPayment!, completion: ((PKPaymentAuthorizationStatus) -> Void)!) {
 //        completion(PKPaymentAuthorizationStatus.Success)
 //    }
@@ -83,36 +83,61 @@ extension TrousersDeatailVC: PKPaymentAuthorizationViewControllerDelegate {
     }
     
     
-    
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((status: PKPaymentAuthorizationStatus, shippingMethods: [AnyObject]!, summaryItems: [AnyObject]!) -> Void)!) {
-        completion(status:PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems:calculateSummaryItemsFromSwag(swag))
-        let shippingAddress = createShippingAddressFromRef(address)
-        switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
-        case (.Some(let state), .Some(let city), .Some(let zip)):
-            completion(status: PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems: nil)
-        default:
-            completion(status: PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, shippingMethods: nil, summaryItems: nil)
-        }
+    
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((PKPaymentAuthorizationStatus, [AnyObject]!, [AnyObject]!) -> Void)!) {
+                completion(PKPaymentAuthorizationStatus.Success, nil, calculateSummaryItemsFromSwag(swag))
+                let shippingAddress = createShippingAddressFromRef(address)
+                switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
+                case (.Some(let state), .Some(let city), .Some(let zip)):
+                    completion(PKPaymentAuthorizationStatus.Success, nil, nil)
+                default:
+                    completion(PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, nil, nil)
+                }
+
     }
+    
+    
+    
+    
+//    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((status: PKPaymentAuthorizationStatus, shippingMethods: [AnyObject]!, summaryItems: [AnyObject]!) -> Void)!) {
+//        completion(status:PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems:calculateSummaryItemsFromSwag(swag))
+//        let shippingAddress = createShippingAddressFromRef(address)
+//        switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
+//        case (.Some(let state), .Some(let city), .Some(let zip)):
+//            completion(status: PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems: nil)
+//        default:
+//            completion(status: PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, shippingMethods: nil, summaryItems: nil)
+//        }
+//    }
 }
 
-class TrousersDeatailVC: UIViewController {
+
+class OuterwearDetailsVC: UIViewController {
+   
+    
     let SupportedPaymentNetworks = [PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex]
     let ApplePaySwagMerchantID = "merchant.com.EFMMerchantID" // Fill in your merchant ID here!
-    
     @IBOutlet weak var applePayButton: UIButton!
+    
     @IBOutlet weak var descriptionLabel: UILabel!
+    
     @IBOutlet weak var priceLabel: UILabel!
+    
     @IBOutlet weak var efmImageView: UIImageView!
+    
     @IBOutlet weak var featureLabel: UILabel!
-    let shippingPrice: NSDecimalNumber = NSDecimalNumber(string: "20.0")
+    
+    let shippingPrice: NSDecimalNumber = NSDecimalNumber(string: "20.0")    
+    
     var deliveryType: DeliveryType = DeliveryType.toDelivered(method: ShippingMethod.ShippingMethodOptions.first!)
     
     var swag: PFObject! {
         didSet {
+            
+            println("The swag is set")
             self.configureView()
         }
     }
@@ -122,45 +147,63 @@ class TrousersDeatailVC: UIViewController {
         if (!self.isViewLoaded()) {
             return
         }
-        self.title = swag.objectForKey("Title") as String!
-        let price = swag.objectForKey("Price") as NSNumber
+        self.title = swag.objectForKey("Title") as! String!
+        let price = swag.objectForKey("Price")as! NSNumber
+        
+        
         var priceString: NSString {
             let dollarFormatter: NSNumberFormatter = NSNumberFormatter()
             dollarFormatter.minimumFractionDigits = 2;
             dollarFormatter.maximumFractionDigits = 2;
             return dollarFormatter.stringFromNumber(price)!
+            
         }
         
         
-        self.priceLabel.text = "$" + priceString
-        self.descriptionLabel.text = swag.objectForKey("Description") as String!
-        self.featureLabel.text = swag.objectForKey("Features") as String!
+        self.priceLabel.text = "$" + (priceString as String)
+        self.descriptionLabel.text = swag.objectForKey("Description") as! String!
+        self.featureLabel.text = swag.objectForKey("Features") as! String!
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                applePayButton.hidden = !PKPaymentAuthorizationViewController.canMakePaymentsUsingNetworks(SupportedPaymentNetworks)
         
-        applePayButton.hidden = !PKPaymentAuthorizationViewController.canMakePaymentsUsingNetworks(SupportedPaymentNetworks)
         self.configureView()
-        efmImageView.image = nil
+                efmImageView.image = nil
+        
+        
         let queue:dispatch_queue_t = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        
         dispatch_async(queue, { () -> Void in
+            
             var error:NSError?
-            let imageFile:PFFile = self.swag.objectForKey("Image") as PFFile
-            imageFile.getDataInBackgroundWithBlock({ (data: NSData!, error: NSError!) -> Void in
-                let imageData:NSData = data
+            
+            let imageFile:PFFile = self.swag.objectForKey("Image") as! PFFile
+            
+            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
+                
+                let imageData:NSData = data!
+                
                 let image:UIImage = UIImage(data: imageData)!
+                
+                
                 dispatch_async(dispatch_get_main_queue(), {
+                    
                     self.efmImageView.image = image
+                    
                 })
+                
             })
         })
         
+        
+        
     }
     
-  
-    
-    @IBAction func applePay(sender: AnyObject) {
+    @IBAction func applePay(sender: UIButton) {
         let request = PKPaymentRequest()
         
         //
@@ -183,19 +226,19 @@ class TrousersDeatailVC: UIViewController {
     
     func calculateSummaryItemsFromSwag(swag: PFObject) -> [PKPaymentSummaryItem] {
         var summaryItems = [PKPaymentSummaryItem]()
-        let efmTitle = swag.objectForKey("Title") as String!
-        let price = swag.objectForKey("Price") as NSNumber
+        let efmTitle = swag.objectForKey("Title") as! String!
+        let price = swag.objectForKey("Price") as! NSNumber
         var priceString: NSString {
             let dollarFormatter: NSNumberFormatter = NSNumberFormatter()
             dollarFormatter.minimumFractionDigits = 2;
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString)
+        var priceNumber =  NSDecimalNumber( string: priceString as String)
         summaryItems.append(PKPaymentSummaryItem(label: efmTitle, amount: priceNumber))
         switch (deliveryType) {
         case DeliveryType.toDelivered(let method):
-            summaryItems.append(PKPaymentSummaryItem(label: "Shipping", amount: method.method.price))
+            summaryItems.append(PKPaymentSummaryItem(label: "Shipping", amount: method.price))
         case DeliveryType.pickUp:
             break
         }
@@ -205,17 +248,17 @@ class TrousersDeatailVC: UIViewController {
     
     
     func total() -> NSDecimalNumber {
-        let price = swag.objectForKey("Price") as NSNumber
+        let price = swag.objectForKey("Price") as! NSNumber
         var priceString: NSString {
             let dollarFormatter: NSNumberFormatter = NSNumberFormatter()
             dollarFormatter.minimumFractionDigits = 2;
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString)
+        var priceNumber =  NSDecimalNumber( string: priceString as String)
         switch (deliveryType) {
         case DeliveryType.toDelivered(let deliveryType):
-            return priceNumber.decimalNumberByAdding(deliveryType.method.price)
+            return priceNumber.decimalNumberByAdding(deliveryType.price)
         case DeliveryType.pickUp:
             return priceNumber
         }
@@ -249,4 +292,5 @@ class TrousersDeatailVC: UIViewController {
     }
     
     
+   
 }

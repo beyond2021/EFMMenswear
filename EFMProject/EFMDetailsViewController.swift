@@ -94,15 +94,16 @@ extension EFMDetailsViewController: PKPaymentAuthorizationViewControllerDelegate
     func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((status: PKPaymentAuthorizationStatus, shippingMethods: [AnyObject]!, summaryItems: [AnyObject]!) -> Void)!) {
-        completion(status:PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems:calculateSummaryItemsFromSwag(swag))
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((PKPaymentAuthorizationStatus, [AnyObject]!, [AnyObject]!) -> Void)!) {
+        completion(PKPaymentAuthorizationStatus.Success, nil, calculateSummaryItemsFromSwag(swag))
         let shippingAddress = createShippingAddressFromRef(address)
         switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
         case (.Some(let state), .Some(let city), .Some(let zip)):
-            completion(status: PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems: nil)
+            completion(PKPaymentAuthorizationStatus.Success, nil, nil)
         default:
-            completion(status: PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, shippingMethods: nil, summaryItems: nil)
+            completion(PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, nil, nil)
         }
+        
     }
 }
 
@@ -153,8 +154,8 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
         
       getPhotoArray()
         
-        self.title = swag.objectForKey("Title") as String!
-       let price = swag.objectForKey("Price") as NSNumber
+        self.title = swag.objectForKey("Title") as! String!
+       let price = swag.objectForKey("Price") as! NSNumber
         
         
         var priceString: NSString {
@@ -165,9 +166,9 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
                }
         
         
-        self.priceString = "$" + priceString
-        self.descriptionString = swag.objectForKey("Description") as String!
-       self.featureString = swag.objectForKey("Features") as String!
+        self.priceString = "$" + (priceString as String)
+        self.descriptionString = swag.objectForKey("Description") as! String!
+       self.featureString = swag.objectForKey("Features") as! String!
        }
     
     required init(coder aDecoder: NSCoder) {
@@ -186,7 +187,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
         super.init(nibName: nil, bundle: nil)
     }
     
-    convenience override init() {
+    convenience  init() {
         self.init(nibName: nil, bundle: nil)
     }
     
@@ -286,7 +287,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
     
     func getPhotoArray(){
         
-        let imageFile:PFFile = swag.objectForKey("Image") as PFFile
+        let imageFile:PFFile = swag.objectForKey("Image") as! PFFile
         
         
         if    let viewImageFiles = swag.relationForKey("AlternativeViews") as PFRelation! {
@@ -331,7 +332,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
             
             
            let query1 = viewImageFiles.query()
-            query1.findObjectsInBackgroundWithBlock({ (results, error: NSError?) -> Void in
+            query1!.findObjectsInBackgroundWithBlock({ (results, error: NSError?) -> Void in
                 if (error ==  nil)
                     
                 {
@@ -374,9 +375,9 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
          //   let imageFile:PFFile = imageObject.rel("Image") as PFFile
             
             
-            imageFile.getDataInBackgroundWithBlock({ (data: NSData!, error: NSError!) -> Void in
+            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
                 
-                let imageData:NSData = data
+                let imageData:NSData = data!
                 
                 //let image:UIImage = UIImage(data: imageData)!
            //     self.EFMImage = UIImage(data: imageData)!
@@ -432,19 +433,19 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
     
     func calculateSummaryItemsFromSwag(swag: PFObject) -> [PKPaymentSummaryItem] {
         var summaryItems = [PKPaymentSummaryItem]()
-        let efmTitle = swag.objectForKey("Title") as String!
-        let price = swag.objectForKey("Price") as NSNumber
+        let efmTitle = swag.objectForKey("Title") as! String!
+        let price = swag.objectForKey("Price") as! NSNumber
         var priceString: NSString {
             let dollarFormatter: NSNumberFormatter = NSNumberFormatter()
             dollarFormatter.minimumFractionDigits = 2;
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString)
+        var priceNumber =  NSDecimalNumber( string: priceString as String)
         summaryItems.append(PKPaymentSummaryItem(label: efmTitle, amount: priceNumber))
         switch (deliveryType) {
         case DeliveryType.toDelivered(let method):
-            summaryItems.append(PKPaymentSummaryItem(label: "Shipping", amount: method.method.price))
+            summaryItems.append(PKPaymentSummaryItem(label: "Shipping", amount: method.price))
         case DeliveryType.pickUp:
             break
         }
@@ -454,17 +455,17 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
     
     
     func total() -> NSDecimalNumber {
-        let price = swag.objectForKey("Price") as NSNumber
+        let price = swag.objectForKey("Price") as! NSNumber
         var priceString: NSString {
             let dollarFormatter: NSNumberFormatter = NSNumberFormatter()
             dollarFormatter.minimumFractionDigits = 2;
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString)
+        var priceNumber =  NSDecimalNumber( string: priceString as String)
         switch (deliveryType) {
         case DeliveryType.toDelivered(let deliveryType):
-            return priceNumber.decimalNumberByAdding(deliveryType.method.price)
+            return priceNumber.decimalNumberByAdding(deliveryType.price)
         case DeliveryType.pickUp:
             return priceNumber
         }

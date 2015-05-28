@@ -49,7 +49,7 @@ class KYCircularProgress: UIView {
     }
     var colors: [AnyObject]? {
         didSet {
-            self.gradientLayer.colors = self.colors?
+            self.gradientLayer.colors = self.colors
         }
     }
     
@@ -101,7 +101,7 @@ class KYCircularShapeView: UIView {
     }
     
     func shapeLayer() -> CAShapeLayer {
-        return self.layer as CAShapeLayer
+        return self.layer as! CAShapeLayer
     }
     
     required init(coder aDecoder: NSCoder) {

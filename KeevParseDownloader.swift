@@ -34,17 +34,17 @@ class KeevParseDownloader {
     func queryParseMethod(pClassName: String){
         let query = PFQuery(className: pClassName)
         query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-                self.resultsArray = objects
+                self.resultsArray = objects!
                 self.datasource!.parseDataArray(self)
                 self.datasource!.receiveDataStopSpinner()
                // NSLog("Successfully retrieved \(objects.count) scores.")
-                for object in objects {
+                for object in objects! {
                 }
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@",  error!.userInfo!)
                 self.datasource!.noDataShowError()
             }
         }

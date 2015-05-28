@@ -37,7 +37,7 @@ class KeevinCustomSegue: UIStoryboardSegue {
             
         }), completion: {
             (value: Bool) in
-            self.sourceViewController.presentViewController(self.destinationViewController as UIViewController,
+            self.sourceViewController.presentViewController(self.destinationViewController as! UIViewController,
                 animated: false,
                 completion: nil)
         })

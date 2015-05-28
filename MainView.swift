@@ -10,10 +10,10 @@ import UIKit
 import Parse
 
 class MainView: UIView {
-    let applePayButton: UIButton!
-    let descriptionLabel: UILabel!
-    let featureLabel: UILabel!
-    let priceLabel:UILabel!
+    var applePayButton: UIButton!
+    var descriptionLabel: UILabel!
+    var featureLabel: UILabel!
+    var priceLabel:UILabel!
     
     
     var descriptionString : String!
@@ -21,17 +21,20 @@ class MainView: UIView {
     var priceString : String!
     
     
-      init(applePayButton: UIButton!,  descriptionString : String!, featureString : String!, priceString : String!  ) {
-        
-        super.init(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
+      init(var applePayButton: UIButton!,  var descriptionString : String!, var featureString : String!, var priceString : String!  ) {
+     
+    //    super.init(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
+        self.applePayButton = applePayButton
         
         let image = UIImage(named: "ApplePaySwagButton") as UIImage?
-        let applePayButton  = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        let applePayButton  = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         applePayButton.frame = CGRectMake(75, 560, 140, 34)
         applePayButton.setImage(image, forState: .Normal)
         applePayButton.sizeToFit()
         
         applePayButton.setTitle("Buy With Apple Pay", forState: UIControlState.Normal)
+        
+  //    super.init(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
         
          let descriptionLabel = UILabel(frame: CGRectMake(18, 90, 250, 40))
         descriptionLabel.numberOfLines = 0
@@ -49,6 +52,8 @@ class MainView: UIView {
         
         descriptionLabel.sizeToFit()
         
+        self.descriptionLabel = descriptionLabel
+        
         
         let featureLabel = UILabel(frame: CGRectMake(18, 280, 250, 60))
         featureLabel.numberOfLines = 0
@@ -63,6 +68,10 @@ class MainView: UIView {
         
         featureLabel.sizeToFit()
         
+        self.featureLabel = featureLabel
+        
+        
+        
         let priceLabel = UILabel(frame: CGRectMake(100, 520, 260, 60))
         priceLabel.textAlignment = NSTextAlignment.Left
         priceLabel.textAlignment = .Left
@@ -73,9 +82,10 @@ class MainView: UIView {
         priceLabel.font = UIFont(name: "HelveticaNeue", size: CGFloat(22))
         priceLabel.sizeToFit()
         
+        self.priceLabel = priceLabel
+        
        // priceLabel.center = self.center
-        
-        
+        super.init(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
         self.addSubview(featureLabel)
         self.addSubview(descriptionLabel)
         
@@ -107,6 +117,8 @@ class MainView: UIView {
 //        
 //        
 //    }
+    
+    
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

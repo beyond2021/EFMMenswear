@@ -135,7 +135,7 @@ class EFMTrousersViewController: UIViewController , UICollectionViewDataSource, 
         
         
         
-        let cell:KnitsCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("knitsCell", forIndexPath:indexPath) as KnitsCollectionViewCell
+        let cell:KnitsCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("knitsCell", forIndexPath:indexPath) as! KnitsCollectionViewCell
         
         cell.layer.shouldRasterize = true //scrolling
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale //scrolling
@@ -149,14 +149,14 @@ class EFMTrousersViewController: UIViewController , UICollectionViewDataSource, 
             
             var error:NSError?
             
-            let imageObject:PFObject = self.efmTrousersResultsArray[indexPath.row] as PFObject
+            let imageObject:PFObject = self.efmTrousersResultsArray[indexPath.row] as! PFObject
             
-            let imageFile:PFFile = imageObject.objectForKey("Image") as PFFile
+            let imageFile:PFFile = imageObject.objectForKey("Image") as! PFFile
             
             
-            imageFile.getDataInBackgroundWithBlock({ (data: NSData!, error: NSError!) -> Void in
+            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
                 
-                let imageData:NSData = data
+                let imageData:NSData = data!
                 
                 //let image:UIImage = UIImage(data: imageData)!
                 self.EFMImage = UIImage(data: imageData)!
@@ -188,7 +188,7 @@ class EFMTrousersViewController: UIViewController , UICollectionViewDataSource, 
         
         for view in EFMCollectionView.visibleCells(){
             
-            var view:KnitsCollectionViewCell = view as KnitsCollectionViewCell
+            var view:KnitsCollectionViewCell = view as! KnitsCollectionViewCell
             
             var yOffset:CGFloat = ((EFMCollectionView.contentOffset.y - view.frame.origin.y) / 200) * 25
             view.setImageOffset(CGPointMake(0, yOffset))
@@ -205,17 +205,17 @@ class EFMTrousersViewController: UIViewController , UICollectionViewDataSource, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "trousersSegue"){
             // check for / catch all visible cell(s)
-            for item in EFMCollectionView!.visibleCells() as [KnitsCollectionViewCell] {
+            for item in EFMCollectionView!.visibleCells() as! [KnitsCollectionViewCell] {
                 
-                let cell = sender as KnitsCollectionViewCell
+                let cell = sender as! KnitsCollectionViewCell
                 if let indexPath = self.EFMCollectionView.indexPathForCell(cell){
                     
                     
                     // Grab related PFObject
-                    var objectData:PFObject = self.efmTrousersResultsArray[indexPath.row] as PFObject
+                    var objectData:PFObject = self.efmTrousersResultsArray[indexPath.row] as! PFObject
                     
                     // Pass PFObject to second ViewController
-                    let theDestination = (segue.destinationViewController as TrousersDeatailVC)
+                    let theDestination = (segue.destinationViewController as! TrousersDeatailVC)
                     theDestination.swag = objectData
                 }
             }

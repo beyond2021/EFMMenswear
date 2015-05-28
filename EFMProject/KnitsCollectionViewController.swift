@@ -126,14 +126,14 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         let tableHeight: CGFloat = EFMCollectionView.bounds.size.height
         
         for i in cells {
-            let cell: KnitsCollectionViewCell = i as KnitsCollectionViewCell
+            let cell: KnitsCollectionViewCell = i as! KnitsCollectionViewCell
             cell.transform = CGAffineTransformMakeTranslation(0, tableHeight)
         }
         
         var index = 0
         
         for a in cells {
-            let cell: KnitsCollectionViewCell = a as KnitsCollectionViewCell
+            let cell: KnitsCollectionViewCell = a as! KnitsCollectionViewCell
             UIView.animateWithDuration(1.5, delay: 0.05 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: nil, animations: {
                 cell.transform = CGAffineTransformMakeTranslation(0, 0);
                 }, completion: nil)
@@ -177,7 +177,7 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         
         
-        let cell:KnitsCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("knitsCell", forIndexPath:indexPath) as KnitsCollectionViewCell
+        let cell:KnitsCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("knitsCell", forIndexPath:indexPath) as! KnitsCollectionViewCell
         
         cell.layer.shouldRasterize = true //scrolling
         cell.layer.rasterizationScale = UIScreen.mainScreen().scale //scrolling
@@ -191,14 +191,14 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
             
             var error:NSError?
             
-            let imageObject:PFObject = self.efmKnitsResultsArray[indexPath.row] as PFObject
+            let imageObject:PFObject = self.efmKnitsResultsArray[indexPath.row] as! PFObject
             
-            let imageFile:PFFile = imageObject.objectForKey("Image") as PFFile
+            let imageFile:PFFile = imageObject.objectForKey("Image") as! PFFile
             
             
-            imageFile.getDataInBackgroundWithBlock({ (data: NSData!, error: NSError!) -> Void in
+            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
                 
-            let imageData:NSData = data
+            let imageData:NSData = data!
                 
             //let image:UIImage = UIImage(data: imageData)!
                 self.EFMImage = UIImage(data: imageData)!
@@ -227,7 +227,7 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         for view in EFMCollectionView.visibleCells(){
             
-            var view:KnitsCollectionViewCell = view as KnitsCollectionViewCell
+            var view:KnitsCollectionViewCell = view as! KnitsCollectionViewCell
             
             var yOffset:CGFloat = ((EFMCollectionView.contentOffset.y - view.frame.origin.y) / 200) * 25
             view.setImageOffset(CGPointMake(0, yOffset))
@@ -253,21 +253,21 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         if(segue.identifier == "showDetail"){
             // check for / catch all visible cell(s)
-            for item in EFMCollectionView!.visibleCells() as [KnitsCollectionViewCell] {
+            for item in EFMCollectionView!.visibleCells() as! [KnitsCollectionViewCell] {
                 
-                let cell = sender as KnitsCollectionViewCell
+                let cell = sender as! KnitsCollectionViewCell
                  if let indexPath = self.EFMCollectionView.indexPathForCell(cell){
                 
                 
                 // Grab related PFObject
-                var objectData:PFObject = self.efmKnitsResultsArray[indexPath.row] as PFObject
+                var objectData:PFObject = self.efmKnitsResultsArray[indexPath.row] as! PFObject
                 
                 // Pass PFObject to second ViewController
-                let theDestination = (segue.destinationViewController as EFMDetailsViewController)
+                let theDestination = (segue.destinationViewController as! EFMDetailsViewController)
               theDestination.swag = objectData
                 }
                 if segue.identifier == "idFirstSegueUnwind" {
-                    let firstViewController = segue.destinationViewController as KnitsCollectionViewController
+                    let firstViewController = segue.destinationViewController as! KnitsCollectionViewController
                     
                     
                 }
