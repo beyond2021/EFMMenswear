@@ -48,11 +48,11 @@ func ==(lhs: DeliveryType, rhs: DeliveryType) -> Bool {
 
 class EFMPhoto  {
     
-    var efmImage: PFFile? { didSet { println("The image is set") } }
-    var efmDescription:String { didSet { println("The Description is set") } }
-    var efmFeatures:String { didSet { println("The Features is set") } }
-    var efmPrice:NSNumber { didSet { println("The Price is set") } }
-    var efmTitle:String { didSet { println("The Title is set") } }
+    var efmImage: PFFile? { didSet { print("The image is set") } }
+    var efmDescription:String { didSet { print("The Description is set") } }
+    var efmFeatures:String { didSet { print("The Features is set") } }
+    var efmPrice:NSNumber { didSet { print("The Price is set") } }
+    var efmTitle:String { didSet { print("The Title is set") } }
     //var deliveryType: DeliveryType
     
     

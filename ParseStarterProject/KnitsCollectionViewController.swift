@@ -74,12 +74,12 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
                return sender.resultsArray
     }
     func receiveDataStopSpinner(){
-      println("the data is received")
+      print("the data is received")
         
     }
     
     func noDataShowError(){
-      println("the data has an error")
+      print("the data has an error")
         
     }
     
@@ -134,7 +134,7 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         for a in cells {
             let cell: KnitsCollectionViewCell = a as! KnitsCollectionViewCell
-            UIView.animateWithDuration(1.5, delay: 0.05 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: nil, animations: {
+            UIView.animateWithDuration(1.5, delay: 0.05 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
                 cell.transform = CGAffineTransformMakeTranslation(0, 0);
                 }, completion: nil)
             
@@ -155,9 +155,12 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         downloader.queryParseMethod("Knits")
         
-        println(downloader.resultsArray)
+     //   print("the returned array is : \(downloader.resultsArray)")
         self.efmKnitsResultsArray = downloader.resultsArray
        // spinner.stopAnimating()
+        print("our array is :\(self.efmKnitsResultsArray)")
+        
+        
         self.EFMCollectionView.reloadData()        
         
     }
@@ -165,7 +168,7 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        println("the count is : \(efmKnitsResultsArray.count)")
+        print("the count is : \(efmKnitsResultsArray.count)")
         return efmKnitsResultsArray.count
         
         
@@ -198,11 +201,23 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
             
             imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) -> Void in
                 
-            let imageData:NSData = data!
+                if (error != nil){
+                   print("There was an error")
+                    
+                }
+                
+                
+                if   let imageData:NSData = data{
+                    self.EFMImage = UIImage(data: imageData)!
+                    
+                } else{
+                    print("There was image data")
+                    
+                }
                 
             //let image:UIImage = UIImage(data: imageData)!
-                self.EFMImage = UIImage(data: imageData)!
-            
+             //   self.EFMImage = UIImage(data: imageData)!
+               
             
             dispatch_async(dispatch_get_main_queue(), {
                 
@@ -219,6 +234,8 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
             
         })
              })
+            
+            
         return cell
     }
     
@@ -227,9 +244,9 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
         
         for view in EFMCollectionView.visibleCells(){
             
-            var view:KnitsCollectionViewCell = view as! KnitsCollectionViewCell
+            let view:KnitsCollectionViewCell = view as! KnitsCollectionViewCell
             
-            var yOffset:CGFloat = ((EFMCollectionView.contentOffset.y - view.frame.origin.y) / 200) * 25
+            let yOffset:CGFloat = ((EFMCollectionView.contentOffset.y - view.frame.origin.y) / 200) * 25
             view.setImageOffset(CGPointMake(0, yOffset))
             
             // EFMCollectionView.contentOffset.y = 3
@@ -260,7 +277,7 @@ class KnitsCollectionViewController: UIViewController, UICollectionViewDataSourc
                 
                 
                 // Grab related PFObject
-                var objectData:PFObject = self.efmKnitsResultsArray[indexPath.row] as! PFObject
+                let objectData:PFObject = self.efmKnitsResultsArray[indexPath.row] as! PFObject
                 
                 // Pass PFObject to second ViewController
                 let theDestination = (segue.destinationViewController as! EFMDetailsViewController)

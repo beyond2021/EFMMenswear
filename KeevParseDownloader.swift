@@ -40,11 +40,11 @@ class KeevParseDownloader {
                 self.datasource!.parseDataArray(self)
                 self.datasource!.receiveDataStopSpinner()
                // NSLog("Successfully retrieved \(objects.count) scores.")
-                for object in objects! {
+                for _ in objects! {
                 }
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@",  error!.userInfo!)
+                NSLog("Error: %@ %@",  error!.userInfo)
                 self.datasource!.noDataShowError()
             }
         }

@@ -57,7 +57,7 @@ public class PullToRefreshView: UIView {
         self.addSubview(backgroundView)
         
         self.arrow = UIImageView(frame: CGRectMake(0, 0, 60, 60))
-        self.arrow.autoresizingMask = UIViewAutoresizing.FlexibleLeftMargin |  UIViewAutoresizing.FlexibleRightMargin
+        self.arrow.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleRightMargin]
         self.arrow.image = UIImage(named: PullToRefreshConst.imageName)
         self.addSubview(arrow)
         
@@ -84,19 +84,19 @@ public class PullToRefreshView: UIView {
             scrollViewBounces = (superView as! UIScrollView).bounces
             scrollViewInsets = (superView as! UIScrollView).contentInset
             
-            println((superView as! UIScrollView).contentOffset.y)
-            println((superView as! UIScrollView).contentInset.top)
+            print((superView as! UIScrollView).contentOffset.y)
+            print((superView as! UIScrollView).contentInset.top)
         }
     }
     
     deinit {
-        var scrollView = superview as? UIScrollView
+        let scrollView = superview as? UIScrollView
         scrollView?.removeObserver(self, forKeyPath: contentOffsetKeyPath, context: &kvoContext)
     }
     
     // MARK: KVO
     
-    public override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<()>) {
+    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<()>) {
         
         if (context == &kvoContext && keyPath == contentOffsetKeyPath) {
             if let scrollView = object as? UIScrollView {
@@ -104,7 +104,7 @@ public class PullToRefreshView: UIView {
                 // Debug
                 //println(scrollView.contentOffset.y)
                 
-                var offsetWithoutInsets = self.previousOffset + self.scrollViewInsets.top
+                let offsetWithoutInsets = self.previousOffset + self.scrollViewInsets.top
                 
                 // Alpha set
                 if PullToRefreshConst.alpha {
@@ -155,12 +155,12 @@ public class PullToRefreshView: UIView {
         self.indicator.startAnimating()
         self.arrow.hidden = true
         
-        var scrollView = superview as! UIScrollView
+        let scrollView = superview as! UIScrollView
         var insets = scrollView.contentInset
         insets.top += self.frame.size.height
         scrollView.contentOffset.y = self.previousOffset
         scrollView.bounces = false
-        UIView.animateWithDuration(PullToRefreshConst.duration, delay: 0, options:nil, animations: {
+        UIView.animateWithDuration(PullToRefreshConst.duration, delay: 0, options:[], animations: {
             scrollView.contentInset = insets
             scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, -insets.top)
         }, completion: {finished in
@@ -174,7 +174,7 @@ public class PullToRefreshView: UIView {
         self.arrow.transform = CGAffineTransformIdentity
         self.arrow.hidden = false
         
-        var scrollView = superview as! UIScrollView
+        let scrollView = superview as! UIScrollView
         scrollView.bounces = self.scrollViewBounces
         UIView.animateWithDuration(PullToRefreshConst.duration, animations: { () -> Void in
             scrollView.contentInset = self.scrollViewInsets
@@ -184,14 +184,14 @@ public class PullToRefreshView: UIView {
     }
     
     private func arrowRotation() {
-        UIView.animateWithDuration(0.2, delay: 0, options:nil, animations: {
+        UIView.animateWithDuration(0.2, delay: 0, options:[], animations: {
             // -0.0000001 for the rotation direction control
             self.arrow.transform = CGAffineTransformMakeRotation(CGFloat(M_PI-0.0000001))
             }, completion: nil)
     }
     
     private func arrowRotationBack() {
-        UIView.animateWithDuration(0.2, delay: 0, options:nil, animations: {
+        UIView.animateWithDuration(0.2, delay: 0, options:[], animations: {
             self.arrow.transform = CGAffineTransformIdentity
             }, completion: nil)
     }

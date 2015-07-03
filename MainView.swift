@@ -21,13 +21,13 @@ class MainView: UIView {
     var priceString : String!
     
     
-      init(var applePayButton: UIButton!,  var descriptionString : String!, var featureString : String!, var priceString : String!  ) {
+      init(applePayButton: UIButton!,  descriptionString : String!, featureString : String!, priceString : String!  ) {
      
     //    super.init(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
         self.applePayButton = applePayButton
         
         let image = UIImage(named: "ApplePaySwagButton") as UIImage?
-        let applePayButton  = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        let applePayButton  = UIButton(type:.Custom) as UIButton
         applePayButton.frame = CGRectMake(75, 560, 140, 34)
         applePayButton.setImage(image, forState: .Normal)
         applePayButton.sizeToFit()

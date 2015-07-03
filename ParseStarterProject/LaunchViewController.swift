@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PassKit
 
 let appearance = UITabBarItem.appearance()
 
@@ -51,7 +52,21 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         alertView.addSubview(imageView)
         
         // Create a button and set a listener on it for when it is tapped. Then the button is added to the alert view
-        let button = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+      //  let button = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        
+        if #available(iOS 8.3, *) {
+           // let button = PKPaymentButton(type: .Buy, style: .Black)
+        } else {
+            // Fallback on earlier versions
+        }
+       // button.addTarget(self, action: "applePayButtonPressed", forControlEvents: .TouchUpInside)
+        
+        
+        
+        
+     //   let button = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        let button = UIButton(type:.Custom) as UIButton
+        
         button.setTitle("Dismiss", forState: UIControlState.Normal)
         button.backgroundColor = UIColor.clearColor()
         let buttonWidth: CGFloat = alertWidth/2
@@ -61,7 +76,11 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         button.addTarget(self, action: Selector("dismissAlert"), forControlEvents: UIControlEvents.TouchUpInside)
         
         
-        knitsButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+       // knitsButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        
+        
+        
+        knitsButton = UIButton(type:.Custom) as UIButton
         knitsButton.setTitleColor(UIColor.lightGrayColor(), forState: UIControlState.Normal)
         knitsButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Highlighted)
         knitsButton.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 30)
@@ -76,7 +95,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         
         knitsButton.addTarget(self, action: Selector("knits"), forControlEvents: UIControlEvents.TouchUpInside)
         
-        outerwearButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        outerwearButton = UIButton(type:.Custom) as UIButton
         outerwearButton.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 30)
         outerwearButton.setTitle("Outerwear", forState: UIControlState.Normal)
         outerwearButton.backgroundColor = UIColor.clearColor()
@@ -89,7 +108,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         outerwearButton.addTarget(self, action: Selector("outerWear"), forControlEvents: UIControlEvents.TouchUpInside)
         
         
-        sweaterButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        sweaterButton = UIButton(type:.Custom) as UIButton
         sweaterButton.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 30)
         sweaterButton.setTitle("Sweaters", forState: UIControlState.Normal)
         sweaterButton.backgroundColor = UIColor.clearColor()
@@ -100,7 +119,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         sweaterButton.addTarget(self, action: Selector("sweaters"), forControlEvents: UIControlEvents.TouchUpInside)
         
         
-        trouserButton = UIButton.buttonWithType(UIButtonType.Custom)as! UIButton
+        trouserButton = UIButton(type:.Custom) as UIButton
         trouserButton.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 30)
         trouserButton.setTitle("Trousers", forState: UIControlState.Normal)
         trouserButton.backgroundColor = UIColor.clearColor()
@@ -110,7 +129,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         
         trouserButton.addTarget(self, action: Selector("trousers"), forControlEvents: UIControlEvents.TouchUpInside)
         
-        shopOnlineButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        shopOnlineButton = UIButton(type:.Custom) as UIButton
         shopOnlineButton.titleLabel!.font =  UIFont(name: "HelveticaNeue-UltraLight", size: 30)
         shopOnlineButton.setTitle("ShopOnline", forState: UIControlState.Normal)
         shopOnlineButton.backgroundColor = UIColor.clearColor()
@@ -121,7 +140,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         shopOnlineButton.addTarget(self, action: Selector("dismissAlert"), forControlEvents: UIControlEvents.TouchUpInside)
         
         let image = UIImage(named: "EFMLOGO.jpg") as UIImage!
-        websiteButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        websiteButton = UIButton(type:.Custom) as UIButton
        // websiteButton.setTitle("Website", forState: UIControlState.Normal)
         websiteButton.setImage(image, forState: .Normal)
             websiteButton.backgroundColor = UIColor.clearColor()
@@ -313,7 +332,7 @@ class LaunchViewController: UIViewController, UINavigationControllerDelegate {
         }
         
         
-        return super.segueForUnwindingToViewController(toViewController, fromViewController: fromViewController, identifier: identifier)
+        return super.segueForUnwindingToViewController(toViewController, fromViewController: fromViewController, identifier: identifier)!
             
     }
     

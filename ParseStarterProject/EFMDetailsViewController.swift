@@ -21,7 +21,8 @@ extension EFMDetailsViewController: PKPaymentAuthorizationViewControllerDelegate
 //        completion(PKPaymentAuthorizationStatus.Success)
 //    }
     
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didAuthorizePayment payment: PKPayment!, completion: ((PKPaymentAuthorizationStatus) -> Void)!) {
+    @available(iOS 8.0, *)
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: ((PKPaymentAuthorizationStatus) -> Void)) {
         //completion(PKPaymentAuthorizationStatus.Success)
         
         // 1
@@ -35,7 +36,7 @@ extension EFMDetailsViewController: PKPaymentAuthorizationViewControllerDelegate
             
          //   })
             if (error != nil) {
-                                println(error)
+                                print(error)
                                 completion(PKPaymentAuthorizationStatus.Failure)
                                 return
                             }
@@ -47,7 +48,7 @@ extension EFMDetailsViewController: PKPaymentAuthorizationViewControllerDelegate
             let shippingAddress = self.createShippingAddressFromRef(payment.shippingAddress)
             
             // 5
-            let url = NSURL(string: "http://10.0.0.133:5000/pay")  // Replace with computers local IP Address!
+            let url = NSURL(string: "http://10.0.0.132:5000/pay")  // Replace with computers local IP Address!
             let request = NSMutableURLRequest(URL: url!)
             request.HTTPMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -74,7 +75,14 @@ extension EFMDetailsViewController: PKPaymentAuthorizationViewControllerDelegate
             ]
             
             var error: NSError?
-            request.HTTPBody = NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions(), error: &error)
+            do {
+                request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions())
+            } catch let error1 as NSError {
+                error = error1
+                request.HTTPBody = nil
+            } catch {
+                fatalError()
+            }
             
             // 7
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
@@ -91,30 +99,50 @@ extension EFMDetailsViewController: PKPaymentAuthorizationViewControllerDelegate
     
     
     
-    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController!) {
+//    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
+//        controller.dismissViewControllerAnimated(true, completion: nil)
+//    }
+//    @available(iOS 8.0, *)
+//    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingAddress address: ABRecord, completion: (PKPaymentAuthorizationStatus, [PKShippingMethod], [PKPaymentSummaryItem]) -> Void) {
+//        completion(PKPaymentAuthorizationStatus.Success, nil, calculateSummaryItemsFromSwag(swag))
+//        let shippingAddress = createShippingAddressFromRef(address)
+//        switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
+//        case (.Some(let state), .Some(let city), .Some(let zip)):
+//            completion(PKPaymentAuthorizationStatus.Success, nil, nil)
+//        default:
+//            completion(PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, nil, nil)
+//        }
+//        
+//    }
+//}
+
+
+    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((PKPaymentAuthorizationStatus, [AnyObject]!, [AnyObject]!) -> Void)!) {
-        completion(PKPaymentAuthorizationStatus.Success, nil, calculateSummaryItemsFromSwag(swag))
-        let shippingAddress = createShippingAddressFromRef(address)
-        switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
-        case (.Some(let state), .Some(let city), .Some(let zip)):
-            completion(PKPaymentAuthorizationStatus.Success, nil, nil)
-        default:
-            completion(PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, nil, nil)
-        }
+    @available(iOS 8.0, *)
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingAddress address: ABRecord, completion: (PKPaymentAuthorizationStatus, [PKShippingMethod], [PKPaymentSummaryItem]) -> Void) {
+        
+        let shipping = PKShippingMethod(label: "Standard Shipping", amount: NSDecimalNumber.zero())
+        shipping.detail = "Delivers within two working days"
+
+        
+        completion(.Success, [shipping], calculateSummaryItemsFromSwag(swag))
+        
         
     }
 }
 
+    
+    
+    
 
 
-
-
-class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
+@available(iOS 8.0, *)
+class EFMDetailsViewController: UIViewController{
     
     let SupportedPaymentNetworks = [PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex]
-    let ApplePaySwagMerchantID = "merchant.com.EFMMerchantID" // Fill in your merchant ID here!
+    let ApplePaySwagMerchantID = "merchant.com.EFM" // Fill in your merchant ID here!
     
     var canvasView:UIView!
     var scrollView:UIScrollView!
@@ -123,7 +151,10 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
     var descriptionString : String!
     var featureString : String!
     var priceString : String!
- 
+    
+    let exampleTransitionDelegate = ExampleTransitioningDelegate() //Presentation
+    
+    
     
     
    // var galleryView: UIView!
@@ -142,7 +173,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
     var swag: PFObject! {
         didSet {
           
-            println("The swag is set")
+            print("The swag is set")
                        self.configureView()
         }
     }
@@ -299,7 +330,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
 //            query.whereKey("KnitImages", equalTo: "Image2")
 //           // println("Image2 :\(query)")
             
-             println("viewImageFiles :\(viewImageFiles)")
+             print("viewImageFiles :\(viewImageFiles)")
             
             // To acess the data from the relation object
             
@@ -337,7 +368,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
                     
                 {
                     
-                    println(query1)
+                    print(query1)
                     
                 }
                     
@@ -345,7 +376,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
                     
                 {
                     
-                    println("ERROR LOAD")
+                    print("ERROR LOAD")
                     
                 }
                 
@@ -359,7 +390,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
             
         } else {
             
-            println("The relation is nil")
+            print("The relation is nil")
         }
 
         
@@ -431,6 +462,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
         applePayController.delegate = self
          }
     
+    @available(iOS 8.0, *)
     func calculateSummaryItemsFromSwag(swag: PFObject) -> [PKPaymentSummaryItem] {
         var summaryItems = [PKPaymentSummaryItem]()
         let efmTitle = swag.objectForKey("Title") as! String!
@@ -441,7 +473,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString as String)
+        let priceNumber =  NSDecimalNumber( string: priceString as String)
         summaryItems.append(PKPaymentSummaryItem(label: efmTitle, amount: priceNumber))
         switch (deliveryType) {
         case DeliveryType.toDelivered(let method):
@@ -462,7 +494,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString as String)
+        let priceNumber =  NSDecimalNumber( string: priceString as String)
         switch (deliveryType) {
         case DeliveryType.toDelivered(let deliveryType):
             return priceNumber.decimalNumberByAdding(deliveryType.price)
@@ -494,87 +526,7 @@ class EFMDetailsViewController: UIViewController, UIScrollViewDelegate, UIGestur
     }
     
     
-   /*
-   //Scrollview
-    func loadPage(page: Int) {
-        if page < 0 || page >= pageImages.count {
-                        return
-        }
-        
-     
-        
-        if let pageView = pageViews[page] {
-            
-        } else {
-           
-            
-            var frame = scrollView.bounds
-            frame.origin.x = frame.size.width * CGFloat(page)
-            frame.origin.y = 0.0
-            
-            let newPageView = UIImageView(image: pageImages[page])
-            newPageView.contentMode = .ScaleAspectFit
-            newPageView.frame = frame
-            scrollView.addSubview(newPageView)
-            
-            
-            pageViews[page] = newPageView
-        }
-    }
-    
-    
-    func purgePage(page: Int) {
-        if page < 0 || page >= pageImages.count {
-            // If it's outside the range of what you have to display, then do nothing
-            return
-        }
-        
-        // Remove a page from the scroll view and reset the container array
-        if let pageView = pageViews[page] {
-            pageView.removeFromSuperview()
-            pageViews[page] = nil
-        }
-    }
-    
-    
-     func loadVisiblePages() {
-       
-        let pageWidth = scrollView.frame.size.width
-        let page = Int(floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0)))
-        
-       
-        pageControl.currentPage = page
-        
-       
-        let firstPage = page - 1
-        let lastPage = page + 1
-        
-        
-        for var index = 0; index < firstPage; ++index {
-            purgePage(index)
-        }
-        
-       
-        for index in firstPage...lastPage {
-            loadPage(index)
-        }
-        
-       
-        for var index = lastPage+1; index < pageImages.count; ++index {
-            purgePage(index)
-        }
-    }
-    
-    //MARK - Scrollview Delegate Methods
-    
-    func scrollViewDidScroll(scrollView: UIScrollView!) {
-       
-        loadVisiblePages()
-    }
-    
-    
-    
-    */
+    //MARK:
     
     
     

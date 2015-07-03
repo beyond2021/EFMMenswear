@@ -10,8 +10,8 @@ import UIKit
 
 class SecondCustomSegueUnwind: UIStoryboardSegue {
     override func perform() {
-        var firstVCView = destinationViewController.view as UIView!
-        var thirdVCView = sourceViewController.view as UIView!
+        let firstVCView = destinationViewController.view as UIView!
+        let thirdVCView = sourceViewController.view as UIView!
         
         let screenHeight = UIScreen.mainScreen().bounds.size.height
         firstVCView.frame = CGRectOffset(firstVCView.frame, 0.0, screenHeight)

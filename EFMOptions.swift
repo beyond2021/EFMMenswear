@@ -36,7 +36,7 @@ class EFMOptions: UITableViewController {
     // fatal error: use of unimplemented initializer 'init(nibName:bundle:)'
     // for class 'TestViewController'
     // I made this private since users should use the no-argument constructor.
-    private override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+    private override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     

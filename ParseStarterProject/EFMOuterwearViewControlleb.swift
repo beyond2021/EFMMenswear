@@ -114,7 +114,7 @@ class EFMOuterwearViewControlleb: UIViewController, UICollectionViewDataSource, 
         
         downloader.queryParseMethod("OuterWear")
         
-        println(downloader.resultsArray)
+        print(downloader.resultsArray)
         self.efmOuterwearResultsArray = downloader.resultsArray
         self.EFMCollectionView.reloadData()
         
@@ -188,9 +188,9 @@ class EFMOuterwearViewControlleb: UIViewController, UICollectionViewDataSource, 
         
         for view in EFMCollectionView.visibleCells(){
             
-            var view:KnitsCollectionViewCell = view as! KnitsCollectionViewCell
+            let view:KnitsCollectionViewCell = view as! KnitsCollectionViewCell
             
-            var yOffset:CGFloat = ((EFMCollectionView.contentOffset.y - view.frame.origin.y) / 200) * 25
+            let yOffset:CGFloat = ((EFMCollectionView.contentOffset.y - view.frame.origin.y) / 200) * 25
             view.setImageOffset(CGPointMake(0, yOffset))
             
             
@@ -212,7 +212,7 @@ class EFMOuterwearViewControlleb: UIViewController, UICollectionViewDataSource, 
                     
                     
                     // Grab related PFObject
-                    var objectData:PFObject = self.efmOuterwearResultsArray[indexPath.row] as! PFObject
+                    let objectData:PFObject = self.efmOuterwearResultsArray[indexPath.row] as! PFObject
                     
                     // Pass PFObject to second ViewController
                     let theDestination = (segue.destinationViewController as! OuterwearDetailsVC)

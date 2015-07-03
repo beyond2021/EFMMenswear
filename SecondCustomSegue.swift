@@ -11,8 +11,8 @@ import UIKit
 class SecondCustomSegue: UIStoryboardSegue {
     
     override func perform() {
-        var firstVCView = sourceViewController.view as UIView!
-        var thirdVCView = destinationViewController.view as UIView!
+        let firstVCView = sourceViewController.view as UIView!
+        let thirdVCView = destinationViewController.view as UIView!
         
         
         let window = UIApplication.sharedApplication().keyWindow
@@ -33,7 +33,7 @@ class SecondCustomSegue: UIStoryboardSegue {
                     }, completion: { (Finished) -> Void in
                         
                         firstVCView.transform = CGAffineTransformIdentity
-                        self.sourceViewController.presentViewController(self.destinationViewController as! UIViewController, animated: false, completion: nil)
+                        self.sourceViewController.presentViewController(self.destinationViewController as UIViewController, animated: false, completion: nil)
                         
                         //When the first animation takes place, the first view becomes really small, and this looks like a zoom-out effect. In the completion handler, we begin a new animation where we revert the view of the destination view controller to its normal. Lastly, once this animation is over too, we bring the first view to its normal state, and we present without any further animation the third view controller.                        
                         

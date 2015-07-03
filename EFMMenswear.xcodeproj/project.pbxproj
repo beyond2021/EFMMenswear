@@ -15,6 +15,9 @@
 		2209DF501AA12D8200F388D3 /* PullToRefreshConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209DF4C1AA12D8200F388D3 /* PullToRefreshConst.swift */; };
 		2209DF511AA12D8200F388D3 /* PullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209DF4D1AA12D8200F388D3 /* PullToRefreshView.swift */; };
 		2209DF521AA12D8200F388D3 /* UIScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2209DF4E1AA12D8200F388D3 /* UIScrollViewExtension.swift */; };
+		220E02D21B26E0B200A25D7A /* ExamplePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E02D11B26E0B200A25D7A /* ExamplePresentationController.swift */; };
+		220E02D61B26E3F400A25D7A /* ExampleAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E02D51B26E3F400A25D7A /* ExampleAnimatedTransitioning.swift */; };
+		220E02DA1B26E50000A25D7A /* ExampleTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220E02D91B26E50000A25D7A /* ExampleTransitioningDelegate.swift */; };
 		220EED091A95F51C008AE372 /* EFMDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */; };
 		220EED0B1A9684B3008AE372 /* KeevParseDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EED0A1A9684B3008AE372 /* KeevParseDownloader.swift */; };
 		221A37081A8C546B00B4D508 /* EFM_Launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 221A37071A8C546B00B4D508 /* EFM_Launch.jpg */; };
@@ -85,6 +88,9 @@
 		2209DF4C1AA12D8200F388D3 /* PullToRefreshConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshConst.swift; sourceTree = "<group>"; };
 		2209DF4D1AA12D8200F388D3 /* PullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshView.swift; sourceTree = "<group>"; };
 		2209DF4E1AA12D8200F388D3 /* UIScrollViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtension.swift; sourceTree = "<group>"; };
+		220E02D11B26E0B200A25D7A /* ExamplePresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamplePresentationController.swift; sourceTree = "<group>"; };
+		220E02D51B26E3F400A25D7A /* ExampleAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		220E02D91B26E50000A25D7A /* ExampleTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTransitioningDelegate.swift; sourceTree = "<group>"; };
 		220EED081A95F51C008AE372 /* EFMDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EFMDetailsViewController.swift; sourceTree = "<group>"; };
 		220EED0A1A9684B3008AE372 /* KeevParseDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeevParseDownloader.swift; sourceTree = "<group>"; };
 		221A37071A8C546B00B4D508 /* EFM_Launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = EFM_Launch.jpg; sourceTree = "<group>"; };
@@ -251,6 +257,16 @@
 			name = PullToRefresh;
 			sourceTree = "<group>";
 		};
+		220E02D01B26E07A00A25D7A /* Prfesentation View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				220E02D11B26E0B200A25D7A /* ExamplePresentationController.swift */,
+				220E02D51B26E3F400A25D7A /* ExampleAnimatedTransitioning.swift */,
+				220E02D91B26E50000A25D7A /* ExampleTransitioningDelegate.swift */,
+			);
+			name = "Prfesentation View Controller";
+			sourceTree = "<group>";
+		};
 		221A37061A8C544900B4D508 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +327,7 @@
 		22C790821A9C65C100B0C5FB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				220E02D01B26E07A00A25D7A /* Prfesentation View Controller */,
 				2209DEE71AA0344C00F388D3 /* CoolectionView Layout */,
 				228DF8B61A90A24F00D03FA5 /* KnitsCollectionViewCell.swift */,
 				22C790881A9C676800B0C5FB /* DetailViewControllers */,
@@ -483,7 +500,8 @@
 		81BA813D1A49DA1800E65899 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Parse;
 				TargetAttributes = {
 					22B0FBA91A98E7B30008FA8E = {
@@ -622,9 +640,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				22C7908E1A9C684700B0C5FB /* TrousersDeatailVC.swift in Sources */,
+				220E02DA1B26E50000A25D7A /* ExampleTransitioningDelegate.swift in Sources */,
 				22237D2D1AA55D840004F91F /* MainView.swift in Sources */,
 				228DF8B71A90A24F00D03FA5 /* KnitsCollectionViewCell.swift in Sources */,
 				2209DEE91AA034D900F388D3 /* EFMFlowLayout.swift in Sources */,
+				220E02D21B26E0B200A25D7A /* ExamplePresentationController.swift in Sources */,
 				228DF8BB1A90AB6B00D03FA5 /* EFMDownLoader.swift in Sources */,
 				22C7907E1A9C46DB00B0C5FB /* SecondCustomSegue.swift in Sources */,
 				228DF8B91A90A6C100D03FA5 /* EFMPhoto.swift in Sources */,
@@ -639,6 +659,7 @@
 				22C7908C1A9C681600B0C5FB /* OuterwearDetailsVC.swift in Sources */,
 				22C790771A9C43BC00B0C5FB /* KeevinCustomSegue.swift in Sources */,
 				22C790861A9C668000B0C5FB /* EFMTrousersViewController.swift in Sources */,
+				220E02D61B26E3F400A25D7A /* ExampleAnimatedTransitioning.swift in Sources */,
 				2209DF501AA12D8200F388D3 /* PullToRefreshConst.swift in Sources */,
 				22C790811A9C659800B0C5FB /* EFMOuterwearViewControlleb.swift in Sources */,
 				226F8AFD1AA69716004117FF /* EFMOptions.swift in Sources */,
@@ -690,6 +711,7 @@
 				INFOPLIST_FILE = "EFMMenswear Tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.beyond2021.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EFMMenswear.app/EFMMenswear";
 			};
@@ -706,6 +728,7 @@
 				INFOPLIST_FILE = "EFMMenswear Tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.beyond2021.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EFMMenswear.app/EFMMenswear";
 			};
@@ -730,7 +753,9 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -745,7 +770,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -773,6 +798,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -782,7 +808,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -809,7 +835,9 @@
 					STRIPE_ENABLE_APPLEPAY,
 				);
 				INFOPLIST_FILE = ParseStarterProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.beyond2021.com.EFMApplePay$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = EFMMenswear;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Bridging-Header.h";
@@ -835,7 +863,9 @@
 					STRIPE_ENABLE_APPLEPAY,
 				);
 				INFOPLIST_FILE = ParseStarterProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.beyond2021.com.EFMApplePay$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = EFMMenswear;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Bridging-Header.h";

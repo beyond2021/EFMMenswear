@@ -15,7 +15,7 @@ extension OuterwearDetailsVC: PKPaymentAuthorizationViewControllerDelegate {
 //        completion(PKPaymentAuthorizationStatus.Success)
 //    }
     
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didAuthorizePayment payment: PKPayment!, completion: ((PKPaymentAuthorizationStatus) -> Void)!) {
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: ((PKPaymentAuthorizationStatus) -> Void)) {
         //completion(PKPaymentAuthorizationStatus.Success)
         
         // 1
@@ -29,7 +29,7 @@ extension OuterwearDetailsVC: PKPaymentAuthorizationViewControllerDelegate {
             
             //   })
             if (error != nil) {
-                println(error)
+                print(error)
                 completion(PKPaymentAuthorizationStatus.Failure)
                 return
             }
@@ -41,7 +41,7 @@ extension OuterwearDetailsVC: PKPaymentAuthorizationViewControllerDelegate {
             let shippingAddress = self.createShippingAddressFromRef(payment.shippingAddress)
             
             // 5
-            let url = NSURL(string: "http://10.0.0.133:5000/pay")  // Replace with computers local IP Address!
+            let url = NSURL(string: "http://10.0.0.132:5000/pay")  // Replace with computers local IP Address!
             let request = NSMutableURLRequest(URL: url!)
             request.HTTPMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -68,7 +68,14 @@ extension OuterwearDetailsVC: PKPaymentAuthorizationViewControllerDelegate {
             ]
             
             var error: NSError?
-            request.HTTPBody = NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions(), error: &error)
+            do {
+                request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions())
+            } catch let error1 as NSError {
+                error = error1
+                request.HTTPBody = nil
+            } catch {
+                fatalError()
+            }
             
             // 7
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
@@ -83,22 +90,42 @@ extension OuterwearDetailsVC: PKPaymentAuthorizationViewControllerDelegate {
     }
     
     
-    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController!) {
+    func paymentAuthorizationViewControllerDidFinish(controller: PKPaymentAuthorizationViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController!, didSelectShippingAddress address: ABRecord!, completion: ((PKPaymentAuthorizationStatus, [AnyObject]!, [AnyObject]!) -> Void)!) {
-                completion(PKPaymentAuthorizationStatus.Success, nil, calculateSummaryItemsFromSwag(swag))
-                let shippingAddress = createShippingAddressFromRef(address)
-                switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
-                case (.Some(let state), .Some(let city), .Some(let zip)):
-                    completion(PKPaymentAuthorizationStatus.Success, nil, nil)
-                default:
-                    completion(PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, nil, nil)
-                }
-
-    }
     
+    
+    
+
+    @available(iOS 8.0, *)
+    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingAddress address: ABRecord, completion: (PKPaymentAuthorizationStatus, [PKShippingMethod], [PKPaymentSummaryItem]) -> Void) {
+        
+        let shipping = PKShippingMethod(label: "Standard Shipping", amount: NSDecimalNumber.zero())
+        shipping.detail = "Delivers within two working days"
+        
+        
+        completion(.Success, [shipping], calculateSummaryItemsFromSwag(swag))
+        
+        
+    }
+}
+
+    
+    
+    
+//    func paymentAuthorizationViewController(controller: PKPaymentAuthorizationViewController, didSelectShippingAddress address: ABRecord, completion: (PKPaymentAuthorizationStatus, [PKShippingMethod], [PKPaymentSummaryItem]) -> Void) {
+//                completion(PKPaymentAuthorizationStatus.Success, nil, calculateSummaryItemsFromSwag(swag))
+//                let shippingAddress = createShippingAddressFromRef(address)
+//                switch (shippingAddress.State, shippingAddress.City, shippingAddress.Zip) {
+//                case (.Some(let state), .Some(let city), .Some(let zip)):
+//                    completion(PKPaymentAuthorizationStatus.Success, nil, nil)
+//                default:
+//                    completion(PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, nil, nil)
+//                }
+//
+//    }
+
     
     
     
@@ -112,14 +139,14 @@ extension OuterwearDetailsVC: PKPaymentAuthorizationViewControllerDelegate {
 //            completion(status: PKPaymentAuthorizationStatus.InvalidShippingPostalAddress, shippingMethods: nil, summaryItems: nil)
 //        }
 //    }
-}
+//}
 
 
 class OuterwearDetailsVC: UIViewController {
    
     
     let SupportedPaymentNetworks = [PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex]
-    let ApplePaySwagMerchantID = "merchant.com.EFMMerchantID" // Fill in your merchant ID here!
+    let ApplePaySwagMerchantID = "merchant.com.EFM" // Fill in your merchant ID here!
     @IBOutlet weak var applePayButton: UIButton!
     
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -137,7 +164,7 @@ class OuterwearDetailsVC: UIViewController {
     var swag: PFObject! {
         didSet {
             
-            println("The swag is set")
+            print("The swag is set")
             self.configureView()
         }
     }
@@ -234,7 +261,7 @@ class OuterwearDetailsVC: UIViewController {
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString as String)
+        let priceNumber =  NSDecimalNumber( string: priceString as String)
         summaryItems.append(PKPaymentSummaryItem(label: efmTitle, amount: priceNumber))
         switch (deliveryType) {
         case DeliveryType.toDelivered(let method):
@@ -255,7 +282,7 @@ class OuterwearDetailsVC: UIViewController {
             dollarFormatter.maximumFractionDigits = 4;
             return dollarFormatter.stringFromNumber(price)!
         }
-        var priceNumber =  NSDecimalNumber( string: priceString as String)
+        let priceNumber =  NSDecimalNumber( string: priceString as String)
         switch (deliveryType) {
         case DeliveryType.toDelivered(let deliveryType):
             return priceNumber.decimalNumberByAdding(deliveryType.price)

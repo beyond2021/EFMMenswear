@@ -73,7 +73,7 @@ class KYCircularProgress: UIView {
         gradientLayer.startPoint = CGPointMake(0, 0.5);
         gradientLayer.endPoint = CGPointMake(1, 0.5);
         gradientLayer.mask = self.progressView.shapeLayer();
-        gradientLayer.colors = self.colors ?? [colorHex(0x9ACDE7).CGColor!, colorHex(0xE7A5C9).CGColor!]
+        gradientLayer.colors = self.colors ?? [colorHex(0x9ACDE7).CGColor, colorHex(0xE7A5C9).CGColor]
         
         self.layer.addSublayer(gradientLayer)
         self.progressView.shapeLayer().strokeColor = self.tintColor.CGColor
@@ -123,7 +123,7 @@ class KYCircularShapeView: UIView {
     }
     
     func layoutPath() -> UIBezierPath {
-        var halfWidth = CGFloat(self.frame.size.width / 2.0)
+        let halfWidth = CGFloat(self.frame.size.width / 2.0)
         return UIBezierPath(arcCenter: CGPointMake(halfWidth, halfWidth), radius: halfWidth - self.shapeLayer().lineWidth, startAngle: CGFloat(self.startAngle), endAngle: CGFloat(self.endAngle), clockwise: true)
     }
     

@@ -11,14 +11,14 @@ extension UIScrollView {
 
     private var pullToRefreshView: PullToRefreshView? {
         get {
-            var pullToRefreshView = viewWithTag(PullToRefreshConst.tag)
+            let pullToRefreshView = viewWithTag(PullToRefreshConst.tag)
             return pullToRefreshView as? PullToRefreshView
         }
     }
 
     func addPullToRefresh(refreshCompletion :(() -> ())) {
         let refreshViewFrame = CGRectMake(0, -PullToRefreshConst.height, self.frame.size.width, PullToRefreshConst.height)
-        var refreshView = PullToRefreshView(refreshCompletion: refreshCompletion, frame: refreshViewFrame)
+        let refreshView = PullToRefreshView(refreshCompletion: refreshCompletion, frame: refreshViewFrame)
         refreshView.tag = PullToRefreshConst.tag
         addSubview(refreshView)
     }

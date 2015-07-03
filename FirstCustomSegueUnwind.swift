@@ -34,8 +34,8 @@ class FirstCustomSegueUnwind: UIStoryboardSegue {
     
     override func perform() {
         // Assign the source and destination views to local variables.
-        var secondVCView = self.sourceViewController.view as UIView!
-        var firstVCView = self.destinationViewController.view as UIView!
+        let secondVCView = self.sourceViewController.view as UIView!
+        let firstVCView = self.destinationViewController.view as UIView!
         
         let screenHeight = UIScreen.mainScreen().bounds.size.height
         //Notice that this time the source view controller is the Second View Controller, and the destination is the View Controller. Continuing, here we won’t specify the initial state of any view at all, we’ll just add the view of the first view controller (the one we want to return to) to the window’s subviews:

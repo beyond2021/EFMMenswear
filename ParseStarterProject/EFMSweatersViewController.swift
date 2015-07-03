@@ -114,7 +114,7 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
         
         downloader.queryParseMethod("Sweaters")
         
-        println(downloader.resultsArray)
+        print(downloader.resultsArray)
         self.efmSweaterResultsArray = downloader.resultsArray
         self.EFMCollectionView.reloadData()
         
@@ -188,9 +188,9 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
         
         for view in EFMCollectionView.visibleCells(){
             
-            var view:KnitsCollectionViewCell = view as! KnitsCollectionViewCell
+            let view:KnitsCollectionViewCell = view as! KnitsCollectionViewCell
             
-            var yOffset:CGFloat = ((EFMCollectionView.contentOffset.y - view.frame.origin.y) / 200) * 25
+            let yOffset:CGFloat = ((EFMCollectionView.contentOffset.y - view.frame.origin.y) / 200) * 25
             view.setImageOffset(CGPointMake(0, yOffset))
             
             
@@ -212,7 +212,7 @@ class EFMSwViewController: UIViewController, UICollectionViewDataSource, UIColle
                     
                     
                     // Grab related PFObject
-                    var objectData:PFObject = self.efmSweaterResultsArray[indexPath.row] as! PFObject
+                    let objectData:PFObject = self.efmSweaterResultsArray[indexPath.row] as! PFObject
                     
                     // Pass PFObject to second ViewController
                     let theDestination = (segue.destinationViewController as! SeaterDetailsVC)
